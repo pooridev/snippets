@@ -5,7 +5,7 @@ import Logo from './logo'
 
 const Navbar = () => {
   return (
-    <HStack px={10} py={4} gap={20}>
+    <HStack as='nav' px={10} py={4} gap={20}>
       <Logo />
       <Actions />
     </HStack>
