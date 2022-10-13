@@ -1,7 +1,7 @@
-import { Button as CHButton, theme } from '@chakra-ui/react'
+import { IconButton as CHIconButton, theme } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 
-const Button = styled(CHButton)`
+const IconButton = styled(CHIconButton)`
   background: ${({ bg }) => (bg ? bg : 'white')};
 
   :hover {
@@ -12,4 +12,4 @@ const Button = styled(CHButton)`
     box-shadow: ${theme.shadows.outline};
   }
 `
-export default Button
+export default IconButton

@@ -1,2 +1,8 @@
 export { default as ThemesIcon } from './ThemesIcon'
 export { default as ExportIcon } from './ExportIcon'
+export { default as LeftAlignIcon } from './LeftAlignIcon'
+export { default as RightAlignIcon } from './RightAlignIcon'
+export { default as TopAlignIcon } from './TopAlignIcon'
+export { default as BottomAlignIcon } from './BottomAlignIcon'
+export { default as XAxisCenterIcon } from './XAxisCenterIcon'
+export { default as YAxisCenterIcon } from './YAxisCenterIcon'
