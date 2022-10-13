@@ -18,8 +18,10 @@
     "radash": "^7.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-simple-code-editor": "^0.13.1"
+    "react-resizable-rotatable-draggable": "^0.2.0",
     "react-rnd": "^10.3.7",
+    "react-simple-code-editor": "^0.13.1",
+    "styled-components": "4"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.19.4",
