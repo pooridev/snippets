@@ -3,18 +3,21 @@ import styled from '@emotion/styled'
 import { rem } from 'polished'
 
 import Alignment from './alignment'
+import EditorPositionInputs from './editor-position-inputs'
 
 const Sidebar = () => {
   return (
     <VStack as='aside'>
       <Alignment />
+      <EditorPositionInputs />
     </VStack>
   )
 }
 
 const VStack = styled(ChVStack)`
   position: absolute;
-  overflow-y: auto;
+  overflow: hidden auto;
+  width: ${rem(240)};
   right: ${rem(20)};
   top: ${rem(50)};
   padding-top: ${theme.space[5]};

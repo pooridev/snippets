@@ -7,10 +7,10 @@ const Alignment = () => {
   return (
     <VStack alignItems='flex-start' gap={1}>
       <Text fontWeight='medium'>Alignments</Text>
-      <HStack>
+      <HStack spacing={1}>
         {alignments.map(item => (
           <Tooltip px={3} py={2} borderRadius='md' placement='bottom' label={item.title}>
-            <IconButton borderRadius='md' aria-label={item.title} icon={item.icon} />
+            <IconButton size='sm' borderRadius='md' aria-label={item.title} icon={item.icon} />
           </Tooltip>
         ))}
       </HStack>
