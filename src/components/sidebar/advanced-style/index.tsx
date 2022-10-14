@@ -12,6 +12,7 @@ import { useState } from 'react'
 import Slider from './slider'
 
 const AdvancedStyle = () => {
+  const [state, setState] = useState(20)
   return (
     <Accordion w='100%' allowToggle>
       <AccordionItem
@@ -26,9 +27,9 @@ const AdvancedStyle = () => {
         </AccordionButton>
 
         <AccordionPanel>
-          <Slider label='Opacity' value={20} unit='percent' onReset={() => {}} />
-          <Slider label='Scale' value={50} unit='percent' onReset={() => {}} />
-          <Slider label='Rotate' value={10} unit='degree' onReset={() => {}} />
+          <Slider label='Opacity' value={state} onChange={setState} unit='percent' />
+          <Slider label='Scale' value={50} unit='percent' />
+          <Slider label='Rotate' value={10} unit='degree' />
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

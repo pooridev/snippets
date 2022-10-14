@@ -12,7 +12,7 @@ import {
 import { FC, memo, useRef } from 'react'
 
 import { SliderProps } from '@components/sidebar/types'
-import IconButton from '@components/IconButton'
+import IconButton from '@components/icon-button'
 import { ResetIcon } from '@components/icons'
 import styled from '@emotion/styled'
 import { sliderUnits } from '@components/sidebar/contants'

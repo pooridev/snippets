@@ -1,7 +1,7 @@
 import { HStack, Text, Tooltip, VStack } from '@chakra-ui/react'
 
 import { alignments } from '../contants'
-import IconButton from '@components/IconButton'
+import IconButton from '@components/icon-button'
 
 const Alignment = () => {
   return (
