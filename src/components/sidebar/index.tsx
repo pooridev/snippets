@@ -1,6 +1,7 @@
 import { theme, VStack as ChVStack } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { rem } from 'polished'
+import AdvancedStyle from './advanced-style'
 
 import Alignment from './alignment'
 import EditorPositionInputs from './editor-position-inputs'
@@ -10,6 +11,7 @@ const Sidebar = () => {
     <VStack as='aside'>
       <Alignment />
       <EditorPositionInputs />
+      <AdvancedStyle />
     </VStack>
   )
 }

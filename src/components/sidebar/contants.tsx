@@ -34,4 +34,9 @@ const alignments: Array<{ icon: JSX.Element; title: string }> = [
   },
 ]
 
-export { alignments }
+const sliderUnits = {
+  degree: 'deg',
+  percent: '%',
+}
+
+export { alignments, sliderUnits }
