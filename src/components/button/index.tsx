@@ -4,6 +4,8 @@ import styled from '@emotion/styled'
 const Button = styled(CHButton)`
   background: ${({ bg }) => (bg ? bg : 'white')};
 
+  ${({ mt }) => (mt ? `margin-top: ${mt} !important;` : null)}
+
   :hover {
     background: ${({ bg }) => (bg ? null : theme.colors['gray']['100'])};
   }
