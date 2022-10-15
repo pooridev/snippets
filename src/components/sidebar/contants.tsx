@@ -34,7 +34,7 @@ const alignments: Array<{ icon: JSX.Element; title: string }> = [
   },
 ]
 
-const sliderUnits = {
+const sliderUnits: Record<string, string> = {
   degree: 'deg',
   percent: '%',
 }
