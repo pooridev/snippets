@@ -1,0 +1,12 @@
+.moveable-control-box {
+  border-radius: var(--chakra-space-3) !important;
+}
+
+.moveable-line {
+  background: transparent !important;
+}
+
+.moveable-control {
+  background: rgba(66, 153, 225) !important;
+  z-index: 100;
+}

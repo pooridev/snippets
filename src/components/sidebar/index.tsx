@@ -23,7 +23,7 @@ const VStack = styled(ChVStack)`
   overflow: hidden auto;
   width: ${rem(240)};
   right: ${rem(20)};
-  top: ${rem(50)};
+  top: ${rem(80)};
   padding-top: ${theme.space[5]};
   padding-bottom: ${theme.space[2]};
   padding-inline-start: ${theme.space[4]};
