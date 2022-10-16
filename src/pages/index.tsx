@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 
 import Navbar from '@components/navbar'
 import Sidebar from '@components/sidebar'
-import CodeEditorWrapper from '@components/code-editor-wrapper/index.'
+import CodeEditorWrapper from '@components/code-editor-wrapper'
 
 function Home() {
   return (

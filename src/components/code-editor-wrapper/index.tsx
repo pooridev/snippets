@@ -1,15 +1,19 @@
-import { Box as ChBox, forwardRef, theme } from '@chakra-ui/react'
+import { useRef } from 'react'
+import { Box as ChBox, theme } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import Moveable from 'react-moveable'
-import { useState, useRef } from 'react'
-import { OnResizeStart, OnResize, OnResizeEnd, OnBeforeResize } from 'react-moveable/declaration'
+import { OnResizeStart, OnResize } from 'react-moveable/declaration'
+
+import CodeEditor from './code-editor'
 
 const CodeEditorWrapper = () => {
   const moveableTargetRef = useRef(null)
 
   return (
-    <div>
-      <Box ref={moveableTargetRef}></Box>
+    <>
+      <Box ref={moveableTargetRef}>
+        <CodeEditor />
+      </Box>
       <Moveable
         roundRelative
         target={moveableTargetRef}
@@ -34,7 +38,7 @@ const CodeEditorWrapper = () => {
           target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`
         }}
       ></Moveable>
-    </div>
+    </>
   )
 }
 
@@ -43,25 +47,13 @@ const Box = styled(ChBox)`
   min-width: 200px;
   width: 400px;
   min-height: 100px;
-  border-radius: ${theme.space[5]};
+  border-radius: ${theme.space[1]};
   height: 300px;
   max-width: 550px;
   max-height: 400px;
-  position: relative;
-
-  ::before {
-    content: '';
-    position: absolute;
-    width: calc(100% + 9px);
-    height: calc(100% + 9px);
-    background: transparent;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: ${theme.space[5]};
-    border-bottom-right-radius: 0;
-    border: 1px solid ${theme.colors.blue[600]};
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export default CodeEditorWrapper

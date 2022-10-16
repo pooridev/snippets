@@ -7,6 +7,13 @@
 }
 
 .moveable-control {
-  background: rgba(66, 153, 225) !important;
+  background: white !important;
   z-index: 100;
+  margin-top: -6px !important;
+  margin-left: -5px !important;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 0 !important;
+  border-color: rgba(66, 153, 225) !important;
+  border-width: 1px !important;
 }
