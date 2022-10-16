@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { Box } from '@chakra-ui/react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, MotionProps } from 'framer-motion'
 
 import Tab from './tab'
 import { initialTabs } from '../constants'
@@ -28,7 +28,7 @@ const CodeEditor = () => {
           animate={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: 20 }}
           exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.15 }}
+          transition={{ duration: 0.15 } as any}
         >
           <code>{selectedTab ? selectedTab.current.code : '😋'}</code>
         </Box>
