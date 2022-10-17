@@ -2,7 +2,7 @@ import { theme } from '@chakra-ui/react'
 import Button from '@components/button'
 
 const FormatCodeButton = () => (
-  <Button w='100%' mt={theme.sizes[5]}>
+  <Button bg='gray.200' w='100%' mt={theme.sizes[5]}>
     Format
   </Button>
 )
