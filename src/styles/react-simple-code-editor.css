@@ -1,0 +1,3 @@
+.react-simple-code-editor > *:focus {
+  outline: 0;
+}
