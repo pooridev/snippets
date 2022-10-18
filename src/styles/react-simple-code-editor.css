@@ -1,3 +1,7 @@
 .react-simple-code-editor > *:focus {
   outline: 0;
 }
+
+.react-simple-code-editor {
+  width: 100%;
+}
