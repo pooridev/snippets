@@ -10,15 +10,16 @@ const CodeEditorWrapper = () => {
   const moveableTargetRef = useRef(null)
 
   return (
-    <>
+    <ChBox>
       <Box ref={moveableTargetRef}>
-        <CodeEditor />
+        <CodeEditor containerRef={moveableTargetRef} />
       </Box>
       <Moveable
         roundRelative
         target={moveableTargetRef}
         resizable
         throttleResize={1}
+        originRelative
         keepRatioFinally={false}
         resolveAblesWithRotatable={{
           resizable: ['w', 's'],
@@ -37,8 +38,8 @@ const CodeEditorWrapper = () => {
           target.style.height = `${height}px`
           target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`
         }}
-      ></Moveable>
-    </>
+      />
+    </ChBox>
   )
 }
 

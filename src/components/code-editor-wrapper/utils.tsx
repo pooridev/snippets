@@ -24,4 +24,12 @@ const getIconBasedOnExtension = (label: string) => {
   return EXTENSIONS.find(item => item.extention == lastExtenstion)?.icon || null
 }
 
-export { getIconBasedOnExtension }
+const getBoundingClientRect = (element: HTMLElement | null): DOMRect => {
+  const defaultRects = { top: 0, left: 0, right: 0, bottom: 0, width: 0, x: 0, y: 0, height: 0, toJSON: () => {} }
+  if (!element) return defaultRects
+
+  const rectObject = element.getBoundingClientRect()
+  return rectObject
+}
+
+export { getIconBasedOnExtension, getBoundingClientRect }

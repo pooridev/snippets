@@ -1,4 +1,14 @@
-import { useState, useCallback, FC, memo } from 'react'
+import {
+  useState,
+  useCallback,
+  FC,
+  memo,
+  useRef,
+  forwardRef,
+  ForwardRefRenderFunction,
+  RefObject,
+  useMemo,
+} from 'react'
 import { Box } from '@chakra-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { rem } from 'polished'
@@ -12,6 +22,8 @@ import 'prismjs/themes/prism.css' //Example style, you can use another
 import Tab from './tab'
 import { JSIcon, WindowButtonsIcon } from '@components/icons'
 import { TabData } from '../types'
+import Moveable, { OnDragOrigin } from 'react-moveable'
+import { getBoundingClientRect } from '../utils'
 
 const MemoizedSimpleCodeEditor: FC<{ code: string | undefined; onChange: (value: string) => void }> = memo(
   ({ code, onChange }) => (
@@ -38,7 +50,13 @@ const MemoizedSimpleCodeEditor: FC<{ code: string | undefined; onChange: (value:
   )
 )
 
-const CodeEditor = () => {
+const CodeEditor: FC<{ containerRef: RefObject<HTMLElement> }> = ({ containerRef }) => {
+  const moveableTargetRef = useRef(null)
+  const [frame, setFrame] = useState({
+    translate: [0, 0],
+    rotate: 0,
+    transformOrigin: '50% 50%',
+  })
   const [tabData, setTabData] = useState<TabData | null>({
     code: '// put your code here',
     icon: <JSIcon />,
@@ -64,16 +82,61 @@ const CodeEditor = () => {
     })
   }, [])
 
+  const { top, left, right, bottom } = getBoundingClientRect(containerRef.current)
+
+  console.log({ top, left, right, bottom })
   return (
-    <Wrapper>
-      <Header>
-        <WindowButtonsIcon />
-        <Tab onAddTab={addNewTab} onRemove={deleteTab} tabData={tabData} />
-      </Header>
-      <AnimatePresence exitBeforeEnter>
-        <MemoizedSimpleCodeEditor onChange={handleCodeChange} code={tabData?.code} />
-      </AnimatePresence>
-    </Wrapper>
+    <>
+      <Wrapper ref={moveableTargetRef}>
+        <Header>
+          <WindowButtonsIcon />
+          <Tab onAddTab={addNewTab} onRemove={deleteTab} tabData={tabData} />
+        </Header>
+        <AnimatePresence exitBeforeEnter>
+          <MemoizedSimpleCodeEditor onChange={handleCodeChange} code={tabData?.code} />
+        </AnimatePresence>
+      </Wrapper>
+      <Moveable
+        target={moveableTargetRef}
+        container={containerRef.current}
+        originDraggable={true}
+        originRelative={true}
+        draggable={true}
+        throttleDrag={0}
+        startDragRotate={0}
+        throttleDragRotate={0}
+        zoom={1}
+        origin={false}
+        padding={{ left: 0, top: 0, right: 0, bottom: 0 }}
+        rotatable={true}
+        throttleRotate={0}
+        rotationPosition={'top'}
+        bounds={{ position: 'css', top, bottom, left, right }}
+        onDragOriginStart={e => {
+          e.dragStart && e.dragStart.set(frame.translate)
+        }}
+        onDragOrigin={({ drag, transformOrigin }) => {
+          setFrame(prevFrame => ({ ...prevFrame, translate: drag.beforeTranslate, transformOrigin }))
+        }}
+        onDragStart={e => {
+          e.set(frame.translate)
+        }}
+        onDrag={e => {
+          setFrame(prevFrame => ({ ...prevFrame, translate: e.beforeTranslate }))
+        }}
+        onRotateStart={e => {
+          e.set(frame.rotate)
+        }}
+        onRotate={({ beforeRotate }) => {
+          setFrame(prevFrame => ({ ...prevFrame, rotate: beforeRotate }))
+        }}
+        onRender={e => {
+          const { translate, rotate, transformOrigin } = frame
+          e.target.style.transformOrigin = transformOrigin
+          e.target.style.transform = `translate(${translate[0]}px, ${translate[1]}px)` + ` rotate(${rotate}deg)`
+        }}
+      />
+    </>
   )
 }
 
