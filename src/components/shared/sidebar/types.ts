@@ -6,3 +6,5 @@ export type SliderProps = Pick<CHSliderProps, 'onChange'> & {
   unit: 'percent' | 'degree'
   onReset?: () => void
 }
+
+export type ActionKeys = 'left' | 'right' | 'center-x' | 'center-y' | 'top' | 'bottom'
