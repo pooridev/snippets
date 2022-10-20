@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { rem } from 'polished'
 import { Link as CHLink } from '@chakra-ui/react'
 
-import { Img } from '@components/img'
+import { Img } from '@components/shared/img'
 
 const Logo = () => {
   return (

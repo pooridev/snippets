@@ -1,4 +1,4 @@
-import { JSIcon } from '@components/icons'
+import { JSIcon } from '@components/shared/icons'
 
 const initialTabs: Array<{ label: string; icon: JSX.Element; code: string }> = [
   {

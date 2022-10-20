@@ -2,12 +2,12 @@ import { FC, useState, ChangeEvent, memo, PointerEventHandler, MouseEventHandler
 
 import { TabData, TabProps } from '@components/code-editor-wrapper/types'
 import { AnimatePresence, Reorder, motion } from 'framer-motion'
-import { AddIcon, CloseIcon } from '@components/icons'
+import { AddIcon, CloseIcon } from '@components/shared/icons'
 import { Box, theme } from '@chakra-ui/react'
 import { getIconBasedOnExtension } from '@components/code-editor-wrapper/utils'
 import styled from '@emotion/styled'
 import { rem } from 'polished'
-import Button from '@components/button'
+import Button from '@components/shared/button'
 
 const Tab: FC<TabProps> = ({ tabData, onRemove, onAddTab }) => {
   const [tab, setTab] = useState<Pick<TabData, 'icon' | 'label'> | null>({

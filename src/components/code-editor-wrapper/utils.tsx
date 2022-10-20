@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 
-import { HTMLIcon, JSIcon, JSXIcon, PHPIcon, TSIcon, TSXIcon } from '@components/icons'
-import { CSSIcon, SASSIcon } from '@components/icons'
+import { HTMLIcon, JSIcon, JSXIcon, PHPIcon, TSIcon, TSXIcon } from '@components/shared/icons'
+import { CSSIcon, SASSIcon } from '@components/shared/icons'
 
 const EXTENSIONS = [
   { extention: 'css', icon: <CSSIcon /> },

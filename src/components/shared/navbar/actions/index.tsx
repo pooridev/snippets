@@ -1,8 +1,8 @@
 import { Divider, HStack as CHHStack, theme } from '@chakra-ui/react'
-import { ExportIcon, ThemesIcon } from '@components/icons'
+import { ExportIcon, ThemesIcon } from '@components/shared/icons'
 import { rem } from 'polished'
 
-import Button from '@components/button'
+import Button from '@components/shared/button'
 import styled from '@emotion/styled'
 
 const Actions = () => {

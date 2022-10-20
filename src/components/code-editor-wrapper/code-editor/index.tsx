@@ -10,7 +10,7 @@ import 'prismjs/components/prism-javascript'
 import 'prismjs/themes/prism.css' //Example style, you can use another
 
 import Tab from './tab'
-import { JSIcon, WindowButtonsIcon } from '@components/icons'
+import { JSIcon, WindowButtonsIcon } from '@components/shared/icons'
 import { TabData } from '../types'
 
 const MemoizedSimpleCodeEditor: FC<{ code: string | undefined; onChange: (value: string) => void }> = memo(

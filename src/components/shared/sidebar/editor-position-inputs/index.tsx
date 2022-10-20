@@ -1,5 +1,5 @@
 import { FormLabel, HStack, Text, VStack } from '@chakra-ui/react'
-import NumberInput from '@components/number-input'
+import NumberInput from '@components/shared/number-input'
 
 const EditorPositionInputs = () => {
   return (

@@ -5,7 +5,7 @@ import {
   TopAlignIcon,
   XAxisCenterIcon,
   YAxisCenterIcon,
-} from '@components/icons'
+} from '@components/shared/icons'
 
 const alignments: Array<{ icon: JSX.Element; title: string }> = [
   {

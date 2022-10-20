@@ -11,11 +11,11 @@ import {
 } from '@chakra-ui/react'
 import { FC, memo, useRef } from 'react'
 
-import { SliderProps } from '@components/sidebar/types'
-import IconButton from '@components/icon-button'
-import { ResetIcon } from '@components/icons'
+import { SliderProps } from '@components/shared/sidebar/types'
+import IconButton from '@components/shared/icon-button'
+import { ResetIcon } from '@components/shared/icons'
 import styled from '@emotion/styled'
-import { sliderUnits } from '@components/sidebar/contants'
+import { sliderUnits } from '@components/shared/sidebar/contants'
 
 const Slider: FC<SliderProps> = props => {
   const { label, value, unit, onChange } = props
