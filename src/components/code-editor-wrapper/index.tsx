@@ -51,9 +51,10 @@ const Box = styled(ChBox)`
   height: 300px;
   max-width: 550px;
   max-height: 400px;
-  display: flex;
+  position: relative;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 `
 
 export default CodeEditorWrapper

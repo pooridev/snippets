@@ -3,6 +3,7 @@ import { Box } from '@chakra-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { rem } from 'polished'
 import styled from '@emotion/styled'
+import { useRecoilValue } from 'recoil'
 import SimpleCodeEditor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs/components/prism-core'
 import 'prismjs/components/prism-clike'
@@ -12,6 +13,7 @@ import 'prismjs/themes/prism.css' //Example style, you can use another
 import Tab from './tab'
 import { JSIcon, WindowButtonsIcon } from '@components/shared/icons'
 import { TabData } from '../types'
+import { editorPosition } from '@store/atoms/code-editor'
 
 const MemoizedSimpleCodeEditor: FC<{ code: string | undefined; onChange: (value: string) => void }> = memo(
   ({ code, onChange }) => (
@@ -39,6 +41,7 @@ const MemoizedSimpleCodeEditor: FC<{ code: string | undefined; onChange: (value:
 )
 
 const CodeEditor = () => {
+  const { left, top } = useRecoilValue(editorPosition)
   const [tabData, setTabData] = useState<TabData | null>({
     code: '// put your code here',
     icon: <JSIcon />,
@@ -65,7 +68,7 @@ const CodeEditor = () => {
   }, [])
 
   return (
-    <Wrapper>
+    <Wrapper top={top} left={left}>
       <Header>
         <WindowButtonsIcon />
         <Tab onAddTab={addNewTab} onRemove={deleteTab} tabData={tabData} />
@@ -77,12 +80,16 @@ const CodeEditor = () => {
   )
 }
 
-const Wrapper = styled(Box)`
+const Wrapper = styled(Box)<{ top: number; left: number }>`
   background: rgb(34, 39, 46);
   max-width: ${rem(500)};
   max-height: ${rem(350)};
   min-width: ${rem(270)};
   overflow: hidden;
+  position: absolute;
+  top: ${({ top }) => top}%;
+  left: ${({ left }) => left}%;
+  transform: translate(-${({ left }) => left}%, -${({ top }) => top}%);
   border-radius: ${rem(20)};
   opacity: 0.7;
   padding-inline: ${rem(10)};
