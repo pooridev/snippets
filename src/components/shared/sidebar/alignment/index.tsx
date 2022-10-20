@@ -10,27 +10,25 @@ import { ActionKeys } from '../types'
 const Alignment = () => {
   const setPosition = useSetRecoilState(editorPosition)
 
-  const debouncedSetPosition = throttle({ interval: 600 }, setPosition)
-
   const actions: Record<ActionKeys, () => void> = {
-    left: () => {
-      debouncedSetPosition(prev => ({ ...prev, left: 0 }))
-    },
-    right: () => {
-      debouncedSetPosition(prev => ({ ...prev, left: 100 }))
-    },
-    'center-x': () => {
-      debouncedSetPosition(prev => ({ ...prev, left: 50 }))
-    },
-    'center-y': () => {
-      debouncedSetPosition(prev => ({ ...prev, top: 50 }))
-    },
-    top: () => {
-      debouncedSetPosition(prev => ({ ...prev, top: 0 }))
-    },
-    bottom: () => {
-      debouncedSetPosition(prev => ({ ...prev, top: 100 }))
-    },
+    left: throttle({ interval: 600 }, () => {
+      setPosition(prev => ({ ...prev, left: 0 }))
+    }),
+    right: throttle({ interval: 600 }, () => {
+      setPosition(prev => ({ ...prev, left: 100 }))
+    }),
+    'center-x': throttle({ interval: 600 }, () => {
+      setPosition(prev => ({ ...prev, left: 50 }))
+    }),
+    'center-y': throttle({ interval: 600 }, () => {
+      setPosition(prev => ({ ...prev, top: 50 }))
+    }),
+    top: throttle({ interval: 600 }, () => {
+      setPosition(prev => ({ ...prev, top: 0 }))
+    }),
+    bottom: throttle({ interval: 600 }, () => {
+      setPosition(prev => ({ ...prev, top: 100 }))
+    }),
   }
 
   return (
