@@ -1,4 +1,5 @@
 import { HStack, Text, Tooltip, VStack } from '@chakra-ui/react'
+import { throttle } from 'radash'
 import { useSetRecoilState } from 'recoil'
 
 import { alignments } from '../contants'
@@ -9,24 +10,26 @@ import { ActionKeys } from '../types'
 const Alignment = () => {
   const setPosition = useSetRecoilState(editorPosition)
 
+  const debouncedSetPosition = throttle({ interval: 600 }, setPosition)
+
   const actions: Record<ActionKeys, () => void> = {
     left: () => {
-      setPosition(prev => ({ ...prev, left: 0 }))
+      debouncedSetPosition(prev => ({ ...prev, left: 0 }))
     },
     right: () => {
-      setPosition(prev => ({ ...prev, left: 100 }))
+      debouncedSetPosition(prev => ({ ...prev, left: 100 }))
     },
     'center-x': () => {
-      setPosition(prev => ({ ...prev, left: 50 }))
+      debouncedSetPosition(prev => ({ ...prev, left: 50 }))
     },
     'center-y': () => {
-      setPosition(prev => ({ ...prev, top: 50 }))
+      debouncedSetPosition(prev => ({ ...prev, top: 50 }))
     },
     top: () => {
-      setPosition(prev => ({ ...prev, top: 0 }))
+      debouncedSetPosition(prev => ({ ...prev, top: 0 }))
     },
     bottom: () => {
-      setPosition(prev => ({ ...prev, top: 100 }))
+      debouncedSetPosition(prev => ({ ...prev, top: 100 }))
     },
   }
 
