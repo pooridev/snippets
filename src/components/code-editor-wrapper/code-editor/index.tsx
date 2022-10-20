@@ -13,7 +13,8 @@ import 'prismjs/themes/prism.css' //Example style, you can use another
 import Tab from './tab'
 import { JSIcon, WindowButtonsIcon } from '@components/shared/icons'
 import { TabData } from '../types'
-import { editorPosition } from '@store/atoms/code-editor'
+import { editorPosition, editorStyles } from '@store/atoms/code-editor'
+import { toDecimal } from '@utils/toDecimal'
 
 const MemoizedSimpleCodeEditor: FC<{ code: string | undefined; onChange: (value: string) => void }> = memo(
   ({ code, onChange }) => (
@@ -42,6 +43,8 @@ const MemoizedSimpleCodeEditor: FC<{ code: string | undefined; onChange: (value:
 
 const CodeEditor = () => {
   const { left, top } = useRecoilValue(editorPosition)
+  const { opacity, rotate, scale } = useRecoilValue(editorStyles)
+
   const [tabData, setTabData] = useState<TabData | null>({
     code: '// put your code here',
     icon: <JSIcon />,
@@ -68,7 +71,7 @@ const CodeEditor = () => {
   }, [])
 
   return (
-    <Wrapper top={top} left={left}>
+    <Wrapper top={top} left={left} scale={toDecimal(scale)} rotate={rotate} opacity={toDecimal(opacity)}>
       <Header>
         <WindowButtonsIcon />
         <Tab onAddTab={addNewTab} onRemove={deleteTab} tabData={tabData} />
@@ -80,18 +83,20 @@ const CodeEditor = () => {
   )
 }
 
-const Wrapper = styled(Box)<{ top: number; left: number }>`
+const Wrapper = styled(Box)<{ top: number; left: number; opacity: number; rotate: number; scale: number }>`
   background: rgb(34, 39, 46);
   max-width: ${rem(500)};
   max-height: ${rem(350)};
   min-width: ${rem(270)};
   overflow: hidden;
   position: absolute;
+  opacity: ${({ opacity }) => opacity} !important;
+
   top: ${({ top }) => top}%;
   left: ${({ left }) => left}%;
-  transform: translate(-${({ left }) => left}%, -${({ top }) => top}%);
+  transform: translate(-${({ left }) => left}%, -${({ top }) => top}%) scale(${({ scale }) => scale})
+    rotate(${({ rotate }) => rotate + 'deg'});
   border-radius: ${rem(20)};
-  opacity: 0.7;
   padding-inline: ${rem(10)};
   transition: all cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s;
   box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;

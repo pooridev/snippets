@@ -19,7 +19,8 @@
       "@components/*": ["./src/components/*"],
       "@store/*": ["./src/store/*"],
       "@types/*": ["./src/types/*"],
-      "@assets/*": ["./public/assets/*"]
+      "@assets/*": ["./public/assets/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src"],

@@ -8,11 +8,64 @@ import {
   Text,
   theme,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useSetRecoilState } from 'recoil'
+
+import { DEFUALT_STYLES } from '@components/code-editor-wrapper/constants'
+import { editorStyles } from '@store/atoms/code-editor'
 import Slider from './slider'
 
+const Opacity = () => {
+  const setStyles = useSetRecoilState(editorStyles)
+
+  return (
+    <Slider
+      label='Opacity'
+      value={DEFUALT_STYLES.opacity}
+      min={0}
+      max={100}
+      onChange={value => {
+        setStyles(prev => ({ ...prev, opacity: value }))
+      }}
+      unit='percent'
+    />
+  )
+}
+
+const Scale = () => {
+  const setStyles = useSetRecoilState(editorStyles)
+
+  return (
+    <Slider
+      label='Scale'
+      value={DEFUALT_STYLES.scale}
+      unit='percent'
+      min={0}
+      max={200}
+      onChange={value => {
+        setStyles(prev => ({ ...prev, scale: value }))
+      }}
+    />
+  )
+}
+
+const Rotate = () => {
+  const setStyles = useSetRecoilState(editorStyles)
+
+  return (
+    <Slider
+      min={-180}
+      max={180}
+      label='Rotate'
+      value={DEFUALT_STYLES.rotate}
+      onChange={value => {
+        setStyles(prev => ({ ...prev, rotate: value }))
+      }}
+      unit='degree'
+    />
+  )
+}
+
 const AdvancedStyle = () => {
-  const [state, setState] = useState(20)
   return (
     <Accordion w='100%' allowToggle>
       <AccordionItem
@@ -25,11 +78,10 @@ const AdvancedStyle = () => {
           </Box>
           <AccordionIcon />
         </AccordionButton>
-
         <AccordionPanel>
-          <Slider label='Opacity' value={state} onChange={setState} unit='percent' />
-          <Slider label='Scale' value={50} unit='percent' />
-          <Slider label='Rotate' value={10} unit='degree' />
+          <Opacity />
+          <Scale />
+          <Rotate />
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

@@ -13,8 +13,8 @@ export const editorPosition = atom({
 export const editorStyles = atom({
   key: 'editor-styles',
   default: {
-    opacity: 1,
-    scale: 1,
+    opacity: 100,
+    scale: 100,
     rotate: 0,
   },
 })
