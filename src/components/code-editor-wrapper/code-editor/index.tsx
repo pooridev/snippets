@@ -93,6 +93,7 @@ const Wrapper = styled(Box)<{ top: number; left: number }>`
   border-radius: ${rem(20)};
   opacity: 0.7;
   padding-inline: ${rem(10)};
+  transition: all cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s;
   box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
 `
 

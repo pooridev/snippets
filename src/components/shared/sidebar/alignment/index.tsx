@@ -4,11 +4,12 @@ import { useSetRecoilState } from 'recoil'
 import { alignments } from '../contants'
 import IconButton from '@components/shared/icon-button'
 import { editorPosition } from '@store/atoms/code-editor'
+import { ActionKeys } from '../types'
 
 const Alignment = () => {
   const setPosition = useSetRecoilState(editorPosition)
 
-  const actions = {
+  const actions: Record<ActionKeys, () => void> = {
     left: () => {
       setPosition(prev => ({ ...prev, left: 0 }))
     },
@@ -34,7 +35,7 @@ const Alignment = () => {
       <Text fontWeight='medium'>Alignments</Text>
       <HStack spacing={1}>
         {alignments.map(item => (
-          <Tooltip px={3} py={2} borderRadius='md' placement='bottom' label={item.title}>
+          <Tooltip key={item.key} px={3} py={2} borderRadius='md' placement='bottom' label={item.title}>
             <IconButton
               onClick={actions[item.key]}
               size='sm'
