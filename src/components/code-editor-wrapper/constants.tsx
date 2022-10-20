@@ -1,11 +1,7 @@
 import { JSIcon } from '@components/shared/icons'
 
-const initialTabs: Array<{ label: string; icon: JSX.Element; code: string }> = [
-  {
-    icon: <JSIcon />,
-    label: 'app.js',
-    code: `console.log("hello world")`,
-  },
-]
-
-export { initialTabs }
+const DEFUALT_POSITIONS = {
+  top: 50,
+  left: 50,
+}
+export { DEFUALT_POSITIONS }
