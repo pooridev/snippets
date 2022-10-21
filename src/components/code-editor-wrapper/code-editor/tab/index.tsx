@@ -1,12 +1,11 @@
-import { FC, useState, ChangeEvent, memo, PointerEventHandler, MouseEventHandler } from 'react'
+import styled from '@emotion/styled'
+import { Box, theme } from '@chakra-ui/react'
+import { FC, useState, memo } from 'react'
+import { rem } from 'polished'
 
 import { TabData, TabProps } from '@components/code-editor-wrapper/types'
-import { AnimatePresence, Reorder, motion } from 'framer-motion'
 import { AddIcon, CloseIcon } from '@components/shared/icons'
-import { Box, theme } from '@chakra-ui/react'
 import { getIconBasedOnExtension } from '@components/code-editor-wrapper/utils'
-import styled from '@emotion/styled'
-import { rem } from 'polished'
 import Button from '@components/shared/button'
 
 const Tab: FC<TabProps> = ({ tabData, onRemove, onAddTab }) => {

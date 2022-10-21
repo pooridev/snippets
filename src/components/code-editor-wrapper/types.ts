@@ -1,4 +1,4 @@
-export type TabData = { label: string; icon: JSX.Element | null; code: string }
+export type TabData = { label: string; icon: JSX.Element | null }
 
 export type TabProps = {
   tabData: Pick<TabData, 'icon' | 'label'> | null

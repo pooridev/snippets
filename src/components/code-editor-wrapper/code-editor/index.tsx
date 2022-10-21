@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { rem } from 'polished'
 import styled from '@emotion/styled'
 import { useRecoilValue } from 'recoil'
-import SimpleCodeEditor from 'react-simple-code-editor'
+import ReactSimpleCodeEditor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs/components/prism-core'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
@@ -16,8 +16,9 @@ import { TabData } from '../types'
 import { editorPosition, editorStyles } from '@store/atoms/code-editor'
 import { toDecimal } from '@utils/toDecimal'
 
-const MemoizedSimpleCodeEditor: FC<{ code: string | undefined; onChange: (value: string) => void }> = memo(
-  ({ code, onChange }) => (
+const SimpleCodeEditor = () => {
+  const [code, setCode] = useState('// put your code here')
+  return (
     <Box
       pt={4}
       pb={6}
@@ -29,9 +30,9 @@ const MemoizedSimpleCodeEditor: FC<{ code: string | undefined; onChange: (value:
       transition={{ duration: 0.2 } as any}
       display='flex'
     >
-      <SimpleCodeEditor
+      <ReactSimpleCodeEditor
         value={code || ''}
-        onValueChange={onChange}
+        onValueChange={value => setCode(value)}
         className='react-simple-code-editor'
         lang='javascript'
         highlight={code => highlight(code, languages.js)}
@@ -39,14 +40,13 @@ const MemoizedSimpleCodeEditor: FC<{ code: string | undefined; onChange: (value:
       />
     </Box>
   )
-)
+}
 
 const CodeEditor = () => {
   const { left, top } = useRecoilValue(editorPosition)
   const { opacity, rotate, scale } = useRecoilValue(editorStyles)
 
   const [tabData, setTabData] = useState<TabData | null>({
-    code: '// put your code here',
     icon: <JSIcon />,
     label: 'app.js',
   })
@@ -55,16 +55,8 @@ const CodeEditor = () => {
     setTabData(null)
   }, [])
 
-  const handleCodeChange = useCallback((newCode: string) => {
-    setTabData(prev => ({
-      ...prev!,
-      code: newCode,
-    }))
-  }, [])
-
   const addNewTab = useCallback(() => {
     setTabData({
-      code: '',
       label: '',
       icon: null,
     })
@@ -77,7 +69,7 @@ const CodeEditor = () => {
         <Tab onAddTab={addNewTab} onRemove={deleteTab} tabData={tabData} />
       </Header>
       <AnimatePresence exitBeforeEnter>
-        <MemoizedSimpleCodeEditor onChange={handleCodeChange} code={tabData?.code} />
+        <SimpleCodeEditor />
       </AnimatePresence>
     </Wrapper>
   )
