@@ -9,6 +9,7 @@ import { highlight, languages } from 'prismjs/components/prism-core'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/themes/prism.css' //Example style, you can use another
+import { debounce } from 'radash'
 
 import Tab from './tab'
 import { WindowButtonsIcon } from '@components/shared/icons'
@@ -17,9 +18,9 @@ import { toDecimal } from '@utils/toDecimal'
 
 const SimpleCodeEditor = () => {
   const [codeValue, setCodeValue] = useRecoilState(code)
-
   return (
     <Box
+      paddingInline={rem(15)}
       pt={4}
       pb={6}
       color='white'
@@ -34,7 +35,10 @@ const SimpleCodeEditor = () => {
         value={codeValue || ''}
         onValueChange={value => setCodeValue(value)}
         className='react-simple-code-editor'
-        lang='javascript'
+        lang='JavaScript'
+        style={{
+          fontFamily: '"Fira code", "Fira Mono", monospace',
+        }}
         highlight={code => highlight(code, languages.js)}
         translate='no'
       />
@@ -67,13 +71,11 @@ const Wrapper = styled(Box)<{ top: number; left: number; opacity: number; rotate
   overflow: hidden;
   position: absolute;
   opacity: ${({ opacity }) => opacity} !important;
-
   top: ${({ top }) => top}%;
   left: ${({ left }) => left}%;
   transform: translate(-${({ left }) => left}%, -${({ top }) => top}%) scale(${({ scale }) => scale})
     rotate(${({ rotate }) => rotate + 'deg'});
-  border-radius: ${rem(20)};
-  padding-inline: ${rem(10)};
+  border-radius: ${rem(10)};
   transition: all cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s;
   box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
 `
@@ -83,9 +85,11 @@ const Header = styled(Box)`
   height: ${rem(44)};
   display: flex;
   flex-direction: row;
+  padding-inline: ${rem(15)};
   align-items: center;
   position: relative;
   gap: ${rem(10)};
+  background: rgba(255, 255, 255, 0.06);
 `
 
 export default CodeEditor

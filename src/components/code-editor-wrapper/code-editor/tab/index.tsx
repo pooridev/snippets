@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { Box, theme } from '@chakra-ui/react'
-import { FC, useState, memo } from 'react'
+import { useState, memo } from 'react'
 import { rem } from 'polished'
 
 import { TabData } from '@components/code-editor-wrapper/types'
@@ -41,7 +41,7 @@ const Tab = () => {
 
   const ExtensionIcon = () => tab?.icon!
   return (
-    <Box flex='1' display='flex' color='white' alignItems='center' ml={4}>
+    <Box flex='1' display='flex' color='white' alignItems='center' ml={ADD_MODE ? 4 : 1.5}>
       <Box display='flex' alignItems='center'>
         {ADD_MODE && <ExtensionIcon />}
         {ADD_MODE && (
