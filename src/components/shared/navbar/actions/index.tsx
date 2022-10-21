@@ -10,7 +10,7 @@ import { ExportIcon, ThemesIcon } from '@components/shared/icons'
 import Button from '@components/shared/button'
 
 const Actions = () => {
-  const downloadComponentAsPng = () => {
+  const downloadEditorComponentAsPng = () => {
     const codeEditorEl = document.getElementById('code-editor')
 
     toPng(codeEditorEl!).then(b64 => {
@@ -30,7 +30,7 @@ const Actions = () => {
       <Button
         bg='blue.500'
         color='white'
-        onClick={downloadComponentAsPng}
+        onClick={downloadEditorComponentAsPng}
         _hover={{ bg: 'blue.600' }}
         _active={{ bg: 'blue.700' }}
         type='button'
