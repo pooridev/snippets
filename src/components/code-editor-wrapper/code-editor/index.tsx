@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { rem } from 'polished'
 import styled from '@emotion/styled'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import ReactSimpleCodeEditor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs/components/prism-core'
 import 'prismjs/components/prism-clike'
@@ -12,11 +12,12 @@ import 'prismjs/themes/prism.css' //Example style, you can use another
 
 import Tab from './tab'
 import { WindowButtonsIcon } from '@components/shared/icons'
-import { editorPosition, editorStyles } from '@store/atoms/code-editor'
+import { code, editorPosition, editorStyles } from '@store/atoms/code-editor'
 import { toDecimal } from '@utils/toDecimal'
 
 const SimpleCodeEditor = () => {
-  const [code, setCode] = useState('// put your code here')
+  const [codeValue, setCodeValue] = useRecoilState(code)
+
   return (
     <Box
       pt={4}
@@ -30,8 +31,8 @@ const SimpleCodeEditor = () => {
       display='flex'
     >
       <ReactSimpleCodeEditor
-        value={code || ''}
-        onValueChange={value => setCode(value)}
+        value={codeValue || ''}
+        onValueChange={value => setCodeValue(value)}
         className='react-simple-code-editor'
         lang='javascript'
         highlight={code => highlight(code, languages.js)}

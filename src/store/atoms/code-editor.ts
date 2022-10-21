@@ -1,5 +1,10 @@
 import { atom } from 'recoil'
 
+export const code = atom({
+  key: 'code',
+  default: '// put your code here',
+})
+
 export const editorPosition = atom({
   key: 'editor-position',
   default: {
