@@ -1,12 +1,11 @@
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { FormLabel, HStack, Text, VStack } from '@chakra-ui/react'
-import { memo } from 'react'
 
 import NumberInput from '@components/shared/number-input'
 import { editorPosition } from '@store/atoms/code-editor'
 import { DEFUALT_POSITIONS } from '@components/code-editor-wrapper/constants'
 
-const LeftPosition = memo(() => {
+const LeftPosition = () => {
   const setPosition = useSetRecoilState(editorPosition)
 
   const changeLeftPosition = (_: string, newLeft: number) => {
@@ -33,9 +32,9 @@ const LeftPosition = memo(() => {
       />
     </VStack>
   )
-})
+}
 
-const TopPosition = memo(() => {
+const TopPosition = () => {
   const setPosition = useSetRecoilState(editorPosition)
 
   const changeTopPosition = (_: string, newTop: number) => {
@@ -61,7 +60,7 @@ const TopPosition = memo(() => {
       />
     </VStack>
   )
-})
+}
 
 const EditorPositionInputs = () => {
   return (
