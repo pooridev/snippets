@@ -41,8 +41,18 @@ const Tab = () => {
 
   const ExtensionIcon = () => tab?.icon!
   return (
-    <Box flex='1' display='flex' color='white' alignItems='center' ml={ADD_MODE ? 4 : 1.5}>
-      <Box display='flex' alignItems='center'>
+    <Box
+      borderTopLeftRadius='6px'
+      borderTopRightRadius='6px'
+      h={ADD_MODE ? '90%' : '26px'}
+      alignSelf={ADD_MODE ? 'end' : 'center'}
+      bg={ADD_MODE ? 'rgb(34, 39, 46)' : 'transparent'}
+      // flex='1'
+      display='flex'
+      color='white'
+      alignItems='center'
+    >
+      <Box mx={ADD_MODE ? 4 : 1.5} h='100%' display='flex' alignItems='center'>
         {ADD_MODE && <ExtensionIcon />}
         {ADD_MODE && (
           <Input
@@ -73,7 +83,7 @@ const Tab = () => {
 const Input = styled('input')`
   all: unset;
   outline: 0;
-  max-width: ${rem(51)};
+  max-width: ${rem(53)};
   margin-left: ${rem(8)};
   color: rgba(255, 255, 255, 0.8);
   min-height: ${rem(19)};
