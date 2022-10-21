@@ -3,15 +3,15 @@ import { Box, theme } from '@chakra-ui/react'
 import { FC, useState, memo } from 'react'
 import { rem } from 'polished'
 
-import { TabData, TabProps } from '@components/code-editor-wrapper/types'
-import { AddIcon, CloseIcon } from '@components/shared/icons'
+import { TabData } from '@components/code-editor-wrapper/types'
+import { AddIcon, CloseIcon, JSXIcon } from '@components/shared/icons'
 import { getIconBasedOnExtension } from '@components/code-editor-wrapper/utils'
 import Button from '@components/shared/button'
 
-const Tab: FC<TabProps> = ({ tabData, onRemove, onAddTab }) => {
-  const [tab, setTab] = useState<Pick<TabData, 'icon' | 'label'> | null>({
-    label: tabData?.label!,
-    icon: tabData?.icon!,
+const Tab = () => {
+  const [tab, setTab] = useState<TabData | null>({
+    label: 'app.jsx',
+    icon: <JSXIcon />,
   })
 
   const handleFileNameChange = (newFileName: string) => {
@@ -21,24 +21,25 @@ const Tab: FC<TabProps> = ({ tabData, onRemove, onAddTab }) => {
     })
   }
 
-  const deleteTabData = () => {
-    onRemove()
+  const deleteTab = () => {
     setTab(null)
   }
 
-  const addFile = () => {
-    onAddTab()
+  const addNewTab = () => {
+    setTab({
+      label: '',
+      icon: null,
+    })
+  }
+
+  const ADD_MODE = Boolean(tab)
+
+  const deleteOrAdd = () => {
+    if (!ADD_MODE) addNewTab()
+    else deleteTab()
   }
 
   const ExtensionIcon = () => tab?.icon!
-
-  const ADD_MODE = Boolean(tabData)
-
-  const deleteOrAdd = () => {
-    if (!ADD_MODE) addFile()
-    else deleteTabData()
-  }
-
   return (
     <Box flex='1' display='flex' color='white' alignItems='center' ml={4}>
       <Box display='flex' alignItems='center'>

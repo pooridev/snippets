@@ -11,8 +11,7 @@ import 'prismjs/components/prism-javascript'
 import 'prismjs/themes/prism.css' //Example style, you can use another
 
 import Tab from './tab'
-import { JSIcon, WindowButtonsIcon } from '@components/shared/icons'
-import { TabData } from '../types'
+import { WindowButtonsIcon } from '@components/shared/icons'
 import { editorPosition, editorStyles } from '@store/atoms/code-editor'
 import { toDecimal } from '@utils/toDecimal'
 
@@ -46,27 +45,11 @@ const CodeEditor = () => {
   const { left, top } = useRecoilValue(editorPosition)
   const { opacity, rotate, scale } = useRecoilValue(editorStyles)
 
-  const [tabData, setTabData] = useState<TabData | null>({
-    icon: <JSIcon />,
-    label: 'app.js',
-  })
-
-  const deleteTab = useCallback(() => {
-    setTabData(null)
-  }, [])
-
-  const addNewTab = useCallback(() => {
-    setTabData({
-      label: '',
-      icon: null,
-    })
-  }, [])
-
   return (
     <Wrapper top={top} left={left} scale={toDecimal(scale)} rotate={rotate} opacity={toDecimal(opacity)}>
       <Header>
         <WindowButtonsIcon />
-        <Tab onAddTab={addNewTab} onRemove={deleteTab} tabData={tabData} />
+        <Tab />
       </Header>
       <AnimatePresence exitBeforeEnter>
         <SimpleCodeEditor />
