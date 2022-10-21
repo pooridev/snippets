@@ -41,6 +41,7 @@ const SimpleCodeEditor = () => {
         }}
         highlight={code => highlight(code, languages.js)}
         translate='no'
+        spellCheck='false'
       />
     </Box>
   )
@@ -73,6 +74,8 @@ const Wrapper = styled(Box)<{ top: number; left: number; opacity: number; rotate
   opacity: ${({ opacity }) => opacity} !important;
   top: ${({ top }) => top}%;
   left: ${({ left }) => left}%;
+  // Be careful with the minus signs:
+  // -${({ left }) => left}%
   transform: translate(-${({ left }) => left}%, -${({ top }) => top}%) scale(${({ scale }) => scale})
     rotate(${({ rotate }) => rotate + 'deg'});
   border-radius: ${rem(10)};
@@ -92,4 +95,4 @@ const Header = styled(Box)`
   background: rgba(255, 255, 255, 0.06);
 `
 
-export default CodeEditor
+export default memo(CodeEditor)

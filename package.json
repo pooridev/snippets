@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.10.4",
     "@types/recoil": "^0.0.9",
     "framer-motion": "^7.5.3",
+    "html-to-image": "^1.10.8",
     "polished": "^4.2.2",
     "prismjs": "^1.29.0",
     "radash": "^7.1.0",

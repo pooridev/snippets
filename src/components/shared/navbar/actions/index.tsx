@@ -1,16 +1,36 @@
+import { forwardRef, useRef } from 'react'
 import { Divider, HStack as CHHStack, theme } from '@chakra-ui/react'
-import { ExportIcon, ThemesIcon } from '@components/shared/icons'
 import { rem } from 'polished'
-
-import Button from '@components/shared/button'
 import styled from '@emotion/styled'
+import { useRecoilValue } from 'recoil'
+import { exportComponentAsJPEG } from 'react-component-export-image'
+import { toPng } from 'html-to-image'
+
+import { ExportIcon, ThemesIcon } from '@components/shared/icons'
+import Button from '@components/shared/button'
 
 const Actions = () => {
+  const downloadComponentAsPng = () => {
+    const codeEditorEl = document.getElementById('code-editor')
+
+    toPng(codeEditorEl!).then(b64 => {
+      const link = document.createElement('a')
+      link.href = b64
+
+      link.download = 'snipppets.png'
+      document.body.appendChild(link)
+
+      link.click()
+      document.body.removeChild(link)
+    })
+  }
+
   return (
     <HStack>
       <Button
         bg='blue.500'
         color='white'
+        onClick={downloadComponentAsPng}
         _hover={{ bg: 'blue.600' }}
         _active={{ bg: 'blue.700' }}
         type='button'

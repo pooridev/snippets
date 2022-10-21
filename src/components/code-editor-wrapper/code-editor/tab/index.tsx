@@ -59,6 +59,7 @@ const Tab = () => {
             placeholder='untitled'
             onChange={({ target }) => handleFileNameChange(target.value)}
             value={tab?.label}
+            spellCheck='false'
           />
         )}
         <Button
