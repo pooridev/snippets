@@ -1,4 +1,4 @@
-import React, { FC, ImgHTMLAttributes, useEffect, useRef } from 'react'
+import { FC, ImgHTMLAttributes, useEffect, useRef } from 'react'
 
 export const placeholderImg = '/assets/images/placeholder.jpeg'
 

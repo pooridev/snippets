@@ -61,6 +61,11 @@
       "src"
     ],
     "moduleNameMapper": {
+      "^@components(.*)$": "<rootDir>/src/components$1",
+      "^@store(.*)$": "<rootDir>/src/store$1",
+      "^@utils(.*)$": "<rootDir>/src/utils$1",
+      "^@types(.*)$": "<rootDir>/src/types$1",
+
       "\\.(c|sc|sa)ss$": "identity-obj-proxy"
     }
   }

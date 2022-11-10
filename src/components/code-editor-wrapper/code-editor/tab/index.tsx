@@ -40,6 +40,7 @@ const Tab = () => {
   }
 
   const ExtensionIcon = () => tab?.icon!
+
   return (
     <Box
       borderTopLeftRadius='6px'

@@ -1,4 +1,4 @@
-import { useState, useCallback, FC, memo } from 'react'
+import { memo } from 'react'
 import { Box } from '@chakra-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { rem } from 'polished'
@@ -9,7 +9,6 @@ import { highlight, languages } from 'prismjs/components/prism-core'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/themes/prism.css' //Example style, you can use another
-import { debounce } from 'radash'
 
 import Tab from './tab'
 import { WindowButtonsIcon } from '@components/shared/icons'
@@ -52,7 +51,14 @@ const CodeEditor = () => {
   const { opacity, rotate, scale } = useRecoilValue(editorStyles)
 
   return (
-    <Wrapper top={top} left={left} scale={toDecimal(scale)} rotate={rotate} opacity={toDecimal(opacity)}>
+    <Wrapper
+      aria-label='code-editor'
+      top={top}
+      left={left}
+      scale={toDecimal(scale)}
+      rotate={rotate}
+      opacity={toDecimal(opacity)}
+    >
       <Header>
         <WindowButtonsIcon />
         <Tab />
