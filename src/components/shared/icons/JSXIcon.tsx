@@ -4,7 +4,7 @@ const JSXIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     stroke='rgb(97, 218, 251)'
     fill='rgb(97, 218, 251)'
-    stroke-width='0'
+    strokeWidth='0'
     viewBox='0 0 512 512'
     height='1em'
     width='1em'

@@ -4,7 +4,7 @@ const CSSIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     stroke='rgb(51, 101, 241)'
     fill='rgb(51, 101, 241)'
-    stroke-width='0'
+    strokeWidth='0'
     role='img'
     viewBox='0 0 24 24'
     height='1em'

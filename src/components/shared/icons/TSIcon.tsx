@@ -4,7 +4,7 @@ const TSIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     stroke='rgb(47, 118, 196)'
     fill='rgb(47, 118, 196)'
-    stroke-width='0'
+    strokeWidth='0'
     role='img'
     viewBox='0 0 24 24'
     height='1em'

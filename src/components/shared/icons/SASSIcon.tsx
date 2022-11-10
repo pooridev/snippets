@@ -4,7 +4,7 @@ const SASScon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     stroke='rgb(206, 100, 154)'
     fill='rgb(206, 100, 154)'
-    stroke-width='0'
+    strokeWidth='0'
     viewBox='0 0 640 512'
     height='1em'
     width='1em'

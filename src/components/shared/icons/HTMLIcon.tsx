@@ -4,7 +4,7 @@ const HTMLIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     stroke='rgb(241, 101, 40)'
     fill='rgb(241, 101, 40)'
-    stroke-width='0'
+    strokeWidth='0'
     role='img'
     viewBox='0 0 24 24'
     height='1em'
