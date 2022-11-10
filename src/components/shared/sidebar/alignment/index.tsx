@@ -7,28 +7,23 @@ import IconButton from '@components/shared/icon-button'
 import { editorPosition } from '@store/atoms/code-editor'
 import { ActionKeys } from '../types'
 
+const throttleInterval = 600 // 600ms
+
 const Alignment = () => {
   const setPosition = useSetRecoilState(editorPosition)
 
   const actions: Record<ActionKeys, () => void> = {
-    left: throttle({ interval: 600 }, () => {
-      setPosition(prev => ({ ...prev, left: 0 }))
-    }),
-    right: throttle({ interval: 600 }, () => {
-      setPosition(prev => ({ ...prev, left: 100 }))
-    }),
-    'center-x': throttle({ interval: 600 }, () => {
-      setPosition(prev => ({ ...prev, left: 50 }))
-    }),
-    'center-y': throttle({ interval: 600 }, () => {
-      setPosition(prev => ({ ...prev, top: 50 }))
-    }),
-    top: throttle({ interval: 600 }, () => {
-      setPosition(prev => ({ ...prev, top: 0 }))
-    }),
-    bottom: throttle({ interval: 600 }, () => {
-      setPosition(prev => ({ ...prev, top: 100 }))
-    }),
+    left: throttle({ interval: throttleInterval }, () => setPosition(prev => ({ ...prev, left: 0 }))),
+
+    right: throttle({ interval: throttleInterval }, () => setPosition(prev => ({ ...prev, left: 100 }))),
+
+    'center-x': throttle({ interval: throttleInterval }, () => setPosition(prev => ({ ...prev, left: 50 }))),
+
+    'center-y': throttle({ interval: throttleInterval }, () => setPosition(prev => ({ ...prev, top: 50 }))),
+
+    top: throttle({ interval: throttleInterval }, () => setPosition(prev => ({ ...prev, top: 0 }))),
+
+    bottom: throttle({ interval: throttleInterval }, () => setPosition(prev => ({ ...prev, top: 100 }))),
   }
 
   return (

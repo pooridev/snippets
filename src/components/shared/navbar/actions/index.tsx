@@ -1,9 +1,6 @@
-import { forwardRef, useRef } from 'react'
 import { Divider, HStack as CHHStack, theme } from '@chakra-ui/react'
 import { rem } from 'polished'
 import styled from '@emotion/styled'
-import { useRecoilValue } from 'recoil'
-import { exportComponentAsJPEG } from 'react-component-export-image'
 import { toPng } from 'html-to-image'
 
 import { ExportIcon, ThemesIcon } from '@components/shared/icons'
