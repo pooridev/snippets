@@ -44,7 +44,7 @@ const CodeEditorWrapper = () => {
           target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`
         }}
       />
-    </ChBox>
+    </>
   )
 }
 

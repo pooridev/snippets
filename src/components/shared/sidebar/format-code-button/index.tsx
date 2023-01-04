@@ -10,10 +10,13 @@ const FormatCodeButton = () => {
   const [codeValue, setCodeValue] = useRecoilState(code)
 
   const formatCode = () => {
-    const formattedCode = prettier.format(codeValue, {
-      parser: 'babel',
-      plugins: [babylon],
-    })
+    const formattedCode = prettier
+      .format(codeValue, {
+        parser: 'babel',
+        plugins: [babylon],
+      })
+      // prevent prettier from adding an empty line
+      .replace(/[\r\n]+$/, '')
 
     setCodeValue(formattedCode)
   }
