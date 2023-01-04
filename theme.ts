@@ -6,6 +6,9 @@ const theme = extendTheme({
       body: {
         bg: 'rgb(241, 241, 241)',
       },
+      'body, html, #root': {
+        height: '100%',
+      },
     }),
   },
 })

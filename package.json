@@ -13,7 +13,9 @@
     "@chakra-ui/react": "^2.3.5",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@types/recoil": "^0.0.9",
     "framer-motion": "^7.5.3",
+    "html-to-image": "^1.10.8",
     "polished": "^4.2.2",
     "prismjs": "^1.29.0",
     "radash": "^7.1.0",
@@ -23,6 +25,7 @@
     "react-resizable-rotatable-draggable": "^0.2.0",
     "react-rnd": "^10.3.7",
     "react-simple-code-editor": "^0.13.1",
+    "recoil": "^0.7.6",
     "styled-components": "4"
   },
   "devDependencies": {
@@ -58,6 +61,11 @@
       "src"
     ],
     "moduleNameMapper": {
+      "^@components(.*)$": "<rootDir>/src/components$1",
+      "^@store(.*)$": "<rootDir>/src/store$1",
+      "^@utils(.*)$": "<rootDir>/src/utils$1",
+      "^@types(.*)$": "<rootDir>/src/types$1",
+
       "\\.(c|sc|sa)ss$": "identity-obj-proxy"
     }
   }

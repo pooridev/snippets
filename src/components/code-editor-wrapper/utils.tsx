@@ -1,7 +1,4 @@
-import { ReactElement } from 'react'
-
-import { HTMLIcon, JSIcon, JSXIcon, PHPIcon, TSIcon, TSXIcon } from '@components/icons'
-import { CSSIcon, SASSIcon } from '@components/icons'
+import { HTMLIcon, JSIcon, JSXIcon, PHPIcon, TSIcon, TSXIcon, CSSIcon, SASSIcon } from '@components/shared/icons'
 
 const EXTENSIONS = [
   { extention: 'css', icon: <CSSIcon /> },
@@ -16,12 +13,16 @@ const EXTENSIONS = [
   { extention: 'htm', icon: <HTMLIcon /> },
 ]
 
-const getIconBasedOnExtension = (label: string) => {
+const extractExtension = (label: string) => {
   const splited = label.trim().split('.')
 
-  const lastExtenstion = splited.at(-1)?.toLowerCase()
+  const lastExtenstion = splited.at(-1)!.toLowerCase()
+  return lastExtenstion
+}
 
-  return EXTENSIONS.find(item => item.extention == lastExtenstion)?.icon || null
+const getIconBasedOnExtension = (label: string) => {
+  const extenstion = extractExtension(label)
+  return EXTENSIONS.find(item => item.extention == extenstion)?.icon || null
 }
 
 const getBoundingClientRect = (element: HTMLElement | null): DOMRect => {
@@ -32,4 +33,4 @@ const getBoundingClientRect = (element: HTMLElement | null): DOMRect => {
   return rectObject
 }
 
-export { getIconBasedOnExtension, getBoundingClientRect }
+export { getIconBasedOnExtension, getBoundingClientRect, extractExtension }

@@ -1,33 +1,25 @@
-import {
-  useState,
-  useCallback,
-  FC,
-  memo,
-  useRef,
-  forwardRef,
-  ForwardRefRenderFunction,
-  RefObject,
-  useMemo,
-} from 'react'
+import { memo } from 'react'
 import { Box } from '@chakra-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { rem } from 'polished'
 import styled from '@emotion/styled'
-import SimpleCodeEditor from 'react-simple-code-editor'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import ReactSimpleCodeEditor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs/components/prism-core'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/themes/prism.css' //Example style, you can use another
 
 import Tab from './tab'
-import { JSIcon, WindowButtonsIcon } from '@components/icons'
-import { TabData } from '../types'
-import Moveable, { OnDragOrigin } from 'react-moveable'
-import { getBoundingClientRect } from '../utils'
+import { WindowButtonsIcon } from '@components/shared/icons'
+import { code, editorPosition, editorStyles } from '@store/atoms/code-editor'
+import { toDecimal } from '@utils/toDecimal'
 
-const MemoizedSimpleCodeEditor: FC<{ code: string | undefined; onChange: (value: string) => void }> = memo(
-  ({ code, onChange }) => (
+const SimpleCodeEditor = () => {
+  const [codeValue, setCodeValue] = useRecoilState(code)
+  return (
     <Box
+      paddingInline={rem(15)}
       pt={4}
       pb={6}
       color='white'
@@ -38,117 +30,62 @@ const MemoizedSimpleCodeEditor: FC<{ code: string | undefined; onChange: (value:
       transition={{ duration: 0.2 } as any}
       display='flex'
     >
-      <SimpleCodeEditor
-        value={code || ''}
-        onValueChange={onChange}
+      <ReactSimpleCodeEditor
+        value={codeValue || ''}
+        onValueChange={value => setCodeValue(value)}
         className='react-simple-code-editor'
-        lang='javascript'
+        lang='JavaScript'
+        style={{
+          fontFamily: '"Fira code", "Fira Mono", monospace',
+        }}
         highlight={code => highlight(code, languages.js)}
         translate='no'
+        spellCheck='false'
       />
     </Box>
   )
-)
+}
 
-const CodeEditor: FC<{ containerRef: RefObject<HTMLElement> }> = ({ containerRef }) => {
-  const moveableTargetRef = useRef(null)
-  const [frame, setFrame] = useState({
-    translate: [0, 0],
-    rotate: 0,
-    transformOrigin: '50% 50%',
-  })
-  const [tabData, setTabData] = useState<TabData | null>({
-    code: '// put your code here',
-    icon: <JSIcon />,
-    label: 'app.js',
-  })
+const CodeEditor = () => {
+  const { left, top } = useRecoilValue(editorPosition)
+  const { opacity, rotate, scale } = useRecoilValue(editorStyles)
 
-  const deleteTab = useCallback(() => {
-    setTabData(null)
-  }, [])
-
-  const handleCodeChange = useCallback((newCode: string) => {
-    setTabData(prev => ({
-      ...prev!,
-      code: newCode,
-    }))
-  }, [])
-
-  const addNewTab = useCallback(() => {
-    setTabData({
-      code: '',
-      label: '',
-      icon: null,
-    })
-  }, [])
-
-  const { top, left, right, bottom } = getBoundingClientRect(containerRef.current)
-
-  console.log({ top, left, right, bottom })
   return (
-    <>
-      <Wrapper ref={moveableTargetRef}>
-        <Header>
-          <WindowButtonsIcon />
-          <Tab onAddTab={addNewTab} onRemove={deleteTab} tabData={tabData} />
-        </Header>
-        <AnimatePresence exitBeforeEnter>
-          <MemoizedSimpleCodeEditor onChange={handleCodeChange} code={tabData?.code} />
-        </AnimatePresence>
-      </Wrapper>
-      <Moveable
-        target={moveableTargetRef}
-        container={containerRef.current}
-        originDraggable={true}
-        originRelative={true}
-        draggable={true}
-        throttleDrag={0}
-        startDragRotate={0}
-        throttleDragRotate={0}
-        zoom={1}
-        origin={false}
-        padding={{ left: 0, top: 0, right: 0, bottom: 0 }}
-        rotatable={true}
-        throttleRotate={0}
-        rotationPosition={'top'}
-        bounds={{ position: 'css', top, bottom, left, right }}
-        onDragOriginStart={e => {
-          e.dragStart && e.dragStart.set(frame.translate)
-        }}
-        onDragOrigin={({ drag, transformOrigin }) => {
-          setFrame(prevFrame => ({ ...prevFrame, translate: drag.beforeTranslate, transformOrigin }))
-        }}
-        onDragStart={e => {
-          e.set(frame.translate)
-        }}
-        onDrag={e => {
-          setFrame(prevFrame => ({ ...prevFrame, translate: e.beforeTranslate }))
-        }}
-        onRotateStart={e => {
-          e.set(frame.rotate)
-        }}
-        onRotate={({ beforeRotate }) => {
-          setFrame(prevFrame => ({ ...prevFrame, rotate: beforeRotate }))
-        }}
-        onRender={e => {
-          const { translate, rotate, transformOrigin } = frame
-          e.target.style.transformOrigin = transformOrigin
-          e.target.style.transform = `translate(${translate[0]}px, ${translate[1]}px)` + ` rotate(${rotate}deg)`
-        }}
-      />
-    </>
+    <Wrapper
+      aria-label='code-editor'
+      top={top}
+      left={left}
+      scale={toDecimal(scale)}
+      rotate={rotate}
+      opacity={toDecimal(opacity)}
+    >
+      <Header>
+        <WindowButtonsIcon />
+        <Tab />
+      </Header>
+      <AnimatePresence exitBeforeEnter>
+        <SimpleCodeEditor />
+      </AnimatePresence>
+    </Wrapper>
   )
 }
 
-const Wrapper = styled(Box)`
+const Wrapper = styled(Box)<{ top: number; left: number; opacity: number; rotate: number; scale: number }>`
   background: rgb(34, 39, 46);
   max-width: ${rem(500)};
   max-height: ${rem(350)};
   min-width: ${rem(270)};
   overflow: hidden;
-  border-radius: ${rem(20)};
-  opacity: 0.7;
-  padding-inline: ${rem(10)};
+  position: absolute;
+  opacity: ${({ opacity }) => opacity} !important;
+  top: ${({ top }) => top}%;
+  left: ${({ left }) => left}%;
+  // Be careful with the minus signs:
+  // -${({ left }) => left}%
+  transform: translate(-${({ left }) => left}%, -${({ top }) => top}%) scale(${({ scale }) => scale})
+    rotate(${({ rotate }) => rotate + 'deg'});
+  border-radius: ${rem(10)};
+  transition: all cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s;
   box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
 `
 
@@ -157,9 +94,11 @@ const Header = styled(Box)`
   height: ${rem(44)};
   display: flex;
   flex-direction: row;
+  padding-inline: ${rem(15)};
   align-items: center;
   position: relative;
   gap: ${rem(10)};
+  background: rgba(255, 255, 255, 0.06);
 `
 
-export default CodeEditor
+export default memo(CodeEditor)

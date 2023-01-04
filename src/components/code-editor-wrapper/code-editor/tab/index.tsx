@@ -1,18 +1,17 @@
-import { FC, useState, ChangeEvent, memo, PointerEventHandler, MouseEventHandler } from 'react'
-
-import { TabData, TabProps } from '@components/code-editor-wrapper/types'
-import { AnimatePresence, Reorder, motion } from 'framer-motion'
-import { AddIcon, CloseIcon } from '@components/icons'
-import { Box, theme } from '@chakra-ui/react'
-import { getIconBasedOnExtension } from '@components/code-editor-wrapper/utils'
 import styled from '@emotion/styled'
+import { Box, theme } from '@chakra-ui/react'
+import { useState, memo } from 'react'
 import { rem } from 'polished'
-import Button from '@components/button'
 
-const Tab: FC<TabProps> = ({ tabData, onRemove, onAddTab }) => {
-  const [tab, setTab] = useState<Pick<TabData, 'icon' | 'label'> | null>({
-    label: tabData?.label!,
-    icon: tabData?.icon!,
+import { TabData } from '@components/code-editor-wrapper/types'
+import { AddIcon, CloseIcon, JSXIcon } from '@components/shared/icons'
+import { getIconBasedOnExtension } from '@components/code-editor-wrapper/utils'
+import Button from '@components/shared/button'
+
+const Tab = () => {
+  const [tab, setTab] = useState<TabData | null>({
+    label: 'app.jsx',
+    icon: <JSXIcon />,
   })
 
   const handleFileNameChange = (newFileName: string) => {
@@ -22,33 +21,46 @@ const Tab: FC<TabProps> = ({ tabData, onRemove, onAddTab }) => {
     })
   }
 
-  const deleteTabData = () => {
-    onRemove()
+  const deleteTab = () => {
     setTab(null)
   }
 
-  const addFile = () => {
-    onAddTab()
+  const addNewTab = () => {
+    setTab({
+      label: '',
+      icon: null,
+    })
+  }
+
+  const ADD_MODE = Boolean(tab)
+
+  const deleteOrAdd = () => {
+    if (!ADD_MODE) addNewTab()
+    else deleteTab()
   }
 
   const ExtensionIcon = () => tab?.icon!
 
-  const ADD_MODE = Boolean(tabData)
-
-  const deleteOrAdd = () => {
-    if (!ADD_MODE) addFile()
-    else deleteTabData()
-  }
-
   return (
-    <Box flex='1' display='flex' color='white' alignItems='center' ml={4}>
-      <Box display='flex' alignItems='center'>
+    <Box
+      borderTopLeftRadius='6px'
+      borderTopRightRadius='6px'
+      h={ADD_MODE ? '90%' : '26px'}
+      alignSelf={ADD_MODE ? 'end' : 'center'}
+      bg={ADD_MODE ? 'rgb(34, 39, 46)' : 'transparent'}
+      // flex='1'
+      display='flex'
+      color='white'
+      alignItems='center'
+    >
+      <Box mx={ADD_MODE ? 4 : 1.5} h='100%' display='flex' alignItems='center'>
         {ADD_MODE && <ExtensionIcon />}
         {ADD_MODE && (
           <Input
             placeholder='untitled'
             onChange={({ target }) => handleFileNameChange(target.value)}
             value={tab?.label}
+            spellCheck='false'
           />
         )}
         <Button
@@ -73,7 +85,7 @@ const Tab: FC<TabProps> = ({ tabData, onRemove, onAddTab }) => {
 const Input = styled('input')`
   all: unset;
   outline: 0;
-  max-width: ${rem(51)};
+  max-width: ${rem(53)};
   margin-left: ${rem(8)};
   color: rgba(255, 255, 255, 0.8);
   min-height: ${rem(19)};

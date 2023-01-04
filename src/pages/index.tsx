@@ -1,8 +1,8 @@
 import { Box } from '@chakra-ui/react'
 import React, { useRef } from 'react'
 
-import Navbar from '@components/navbar'
-import Sidebar from '@components/sidebar'
+import Navbar from '@components/shared/navbar'
+import Sidebar from '@components/shared/sidebar'
 import CodeEditorWrapper from '@components/code-editor-wrapper'
 
 function Home() {

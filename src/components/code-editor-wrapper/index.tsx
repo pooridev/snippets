@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Box as ChBox, theme } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import Moveable from 'react-moveable'
@@ -7,12 +7,16 @@ import { OnResizeStart, OnResize } from 'react-moveable/declaration'
 import CodeEditor from './code-editor'
 
 const CodeEditorWrapper = () => {
-  const moveableTargetRef = useRef(null)
+  const moveableTargetRef = useRef<HTMLDivElement | null>(null)
+
+  const [frame, setFrame] = useState({
+    translate: [0, 0],
+  })
 
   return (
-    <ChBox>
-      <Box ref={moveableTargetRef}>
-        <CodeEditor containerRef={moveableTargetRef} />
+    <>
+      <Box id='code-editor' ref={moveableTargetRef}>
+        <CodeEditor />
       </Box>
       <Moveable
         roundRelative
@@ -28,12 +32,13 @@ const CodeEditorWrapper = () => {
         bounds={[9, 16]}
         origin={false}
         renderDirections={['se']}
-        onResizeStart={({ setOrigin, dragStart, target, set, direction }: OnResizeStart) => {
+        onResizeStart={({ setOrigin, dragStart }: OnResizeStart) => {
           setOrigin(['50%', '50%'])
-          if (dragStart) dragStart.set([0, 0])
+          if (dragStart) dragStart.set(frame.translate)
         }}
-        onResize={({ target, width, height, drag, direction }: OnResize) => {
+        onResize={({ target, width, height, drag }: OnResize) => {
           const beforeTranslate = drag.beforeTranslate
+          setFrame({ translate: beforeTranslate })
           target.style.width = `${width}px`
           target.style.height = `${height}px`
           target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`
@@ -52,9 +57,7 @@ const Box = styled(ChBox)`
   height: 300px;
   max-width: 550px;
   max-height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 `
 
 export default CodeEditorWrapper
