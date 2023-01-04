@@ -21,6 +21,7 @@
     "radash": "^7.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hotkeys-hook": "^4.3.2",
     "react-moveable": "^0.39.6",
     "react-resizable-rotatable-draggable": "^0.2.0",
     "react-rnd": "^10.3.7",
@@ -65,7 +66,6 @@
       "^@store(.*)$": "<rootDir>/src/store$1",
       "^@utils(.*)$": "<rootDir>/src/utils$1",
       "^@types(.*)$": "<rootDir>/src/types$1",
-
       "\\.(c|sc|sa)ss$": "identity-obj-proxy"
     }
   }

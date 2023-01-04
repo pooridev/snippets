@@ -2,6 +2,7 @@ import { useRecoilState } from 'recoil'
 import { theme } from '@chakra-ui/react'
 import prettier from 'prettier/standalone'
 import babylon from 'prettier/parser-babel'
+import { useHotkeys } from 'react-hotkeys-hook'
 
 import Button from '@components/shared/button'
 import { code } from '@store/atoms/code-editor'
@@ -20,6 +21,8 @@ const FormatCodeButton = () => {
 
     setCodeValue(formattedCode)
   }
+
+  useHotkeys(['ctrl+shift+f', 'shift+ctrl+f'], formatCode)
 
   return (
     <Button onClick={formatCode} bg='gray.200' w='100%' mt={theme.sizes[5]}>
