@@ -1,5 +1,5 @@
 # snippets
-<h4>✨ Write and share your code snippets </h4>
+<h2>✨ Write and share your code snippets </h2>
 
 
 # Preview
