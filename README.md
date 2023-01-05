@@ -1,5 +1,8 @@
-<h1>snippets</h1>
-<h2 border="0">✨ Write and share your code snippets </h2>
+<h1>snippets
+  </br>
+  <h2>✨ Write and share your code snippets </h2>
+</h1>
+
 
 
 <h1>Preview</h1>
