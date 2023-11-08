@@ -5,6 +5,7 @@ import Moveable from 'react-moveable'
 import { OnResizeStart, OnResize } from 'react-moveable/declaration'
 
 import CodeEditor from './code-editor'
+import PreviewNextPosition from './preview-next-position'
 
 const CodeEditorWrapper = () => {
   const moveableTargetRef = useRef<HTMLDivElement | null>(null)
@@ -17,6 +18,7 @@ const CodeEditorWrapper = () => {
     <>
       <Box id='code-editor' ref={moveableTargetRef}>
         <CodeEditor />
+        <PreviewNextPosition />
       </Box>
       <Moveable
         roundRelative
