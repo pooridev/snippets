@@ -20,7 +20,7 @@ const extractExtension = (label: string) => {
   return lastExtenstion
 }
 
-const getIconBasedOnExtension = (label: string) => {
+const findIconByLabel = (label: string) => {
   const extenstion = extractExtension(label)
   return EXTENSIONS.find(item => item.extention == extenstion)?.icon || null
 }
@@ -33,4 +33,4 @@ const getBoundingClientRect = (element: HTMLElement | null): DOMRect => {
   return rectObject
 }
 
-export { getIconBasedOnExtension, getBoundingClientRect, extractExtension }
+export { findIconByLabel, getBoundingClientRect, extractExtension }

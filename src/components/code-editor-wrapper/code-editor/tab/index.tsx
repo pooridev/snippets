@@ -5,7 +5,7 @@ import { rem } from 'polished'
 
 import { TabData } from '@components/code-editor-wrapper/types'
 import { AddIcon, CloseIcon, JSXIcon } from '@components/shared/icons'
-import { getIconBasedOnExtension } from '@components/code-editor-wrapper/utils'
+import { findIconByLabel } from '@components/code-editor-wrapper/utils'
 import Button from '@components/shared/button'
 
 const Tab = () => {
@@ -16,7 +16,7 @@ const Tab = () => {
 
   const handleFileNameChange = (newFileName: string) => {
     setTab({
-      icon: getIconBasedOnExtension(newFileName),
+      icon: findIconByLabel(newFileName),
       label: newFileName.trim(),
     })
   }
@@ -48,7 +48,6 @@ const Tab = () => {
       h={ADD_MODE ? '90%' : '26px'}
       alignSelf={ADD_MODE ? 'end' : 'center'}
       bg={ADD_MODE ? 'rgb(34, 39, 46)' : 'transparent'}
-      // flex='1'
       display='flex'
       color='white'
       alignItems='center'

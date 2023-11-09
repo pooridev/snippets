@@ -8,7 +8,7 @@ import ReactSimpleCodeEditor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs/components/prism-core'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
-import 'prismjs/themes/prism.css' //Example style, you can use another
+import 'prismjs/themes/prism.css'
 
 import Tab from './tab'
 import { WindowButtonsIcon } from '@components/shared/icons'
