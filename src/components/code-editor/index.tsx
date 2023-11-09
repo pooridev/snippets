@@ -83,10 +83,10 @@ const Wrapper = styled(Box)<{ top: number; left: number; opacity: number; rotate
   opacity: ${({ opacity }) => opacity} !important;
   top: ${({ top }) => top}%;
   left: ${({ left }) => left}%;
-  // Be careful with the minus signs:
-  // -${({ left }) => left}%
-  transform: translate(-${({ left }) => left}%, -${({ top }) => top}%) scale(${({ scale }) => scale})
-    rotate(${({ rotate }) => rotate + 'deg'});
+  translate: -${({ left }) => left}% -${({ top }) => top}%;
+  scale: ${({ scale }) => scale};
+  rotate: ${({ rotate }) => rotate + 'deg'};
+  transform-origin: center center;
   border-radius: ${rem(10)};
   transition: all cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s;
   box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
