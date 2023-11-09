@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { Box, theme } from '@chakra-ui/react'
-import { useState, memo } from 'react'
+import { useState } from 'react'
 import { rem } from 'polished'
 
 import { TabData } from '@components/code-editor-wrapper/types'
@@ -13,6 +13,9 @@ const Tab = () => {
     label: 'app.jsx',
     icon: <JSXIcon />,
   })
+
+  const hasTab = Boolean(tab)
+  const ExtensionIcon = () => tab?.icon || null
 
   const handleFileNameChange = (newFileName: string) => {
     setTab({
@@ -32,29 +35,25 @@ const Tab = () => {
     })
   }
 
-  const ADD_MODE = Boolean(tab)
-
   const deleteOrAdd = () => {
-    if (!ADD_MODE) addNewTab()
-    else deleteTab()
+    if (hasTab) deleteTab()
+    else addNewTab()
   }
-
-  const ExtensionIcon = () => tab?.icon!
 
   return (
     <Box
       borderTopLeftRadius='6px'
       borderTopRightRadius='6px'
-      h={ADD_MODE ? '90%' : '26px'}
-      alignSelf={ADD_MODE ? 'end' : 'center'}
-      bg={ADD_MODE ? 'rgb(34, 39, 46)' : 'transparent'}
+      h={hasTab ? '90%' : '26px'}
+      alignSelf={hasTab ? 'end' : 'center'}
+      bg={hasTab ? 'rgb(34, 39, 46)' : 'transparent'}
       display='flex'
       color='white'
       alignItems='center'
     >
-      <Box mx={ADD_MODE ? 4 : 1.5} h='100%' display='flex' alignItems='center'>
-        {ADD_MODE && <ExtensionIcon />}
-        {ADD_MODE && (
+      <Box mx={hasTab ? 4 : 1.5} h='100%' display='flex' alignItems='center'>
+        {hasTab && <ExtensionIcon />}
+        {hasTab && (
           <Input
             placeholder='untitled'
             onChange={({ target }) => handleFileNameChange(target.value)}
@@ -73,8 +72,11 @@ const Tab = () => {
           bg='transparent'
           onClick={deleteOrAdd}
         >
-          {ADD_MODE && <CloseIcon width={theme.space[3.5]} height={theme.space[3.5]} />}
-          {!ADD_MODE && <AddIcon width={theme.space[3.5]} height={theme.space[3.5]} />}
+          {hasTab ? (
+            <CloseIcon width={theme.space[3.5]} height={theme.space[3.5]} />
+          ) : (
+            <AddIcon width={theme.space[3.5]} height={theme.space[3.5]} />
+          )}
         </Button>
       </Box>
     </Box>
@@ -94,4 +96,4 @@ const Input = styled('input')`
   font-size: ${rem(15)};
 `
 
-export default memo(Tab)
+export default Tab
