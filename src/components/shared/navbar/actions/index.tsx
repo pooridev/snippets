@@ -14,7 +14,7 @@ const Actions = () => {
       const link = document.createElement('a')
       link.href = b64
 
-      link.download = 'snipppets.png'
+      link.download = 'snippets.png'
       document.body.appendChild(link)
 
       link.click()
