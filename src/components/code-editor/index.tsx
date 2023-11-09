@@ -14,8 +14,9 @@ import Tab from './tab'
 import { WindowButtonsIcon } from '@components/shared/icons'
 import { code, editorPosition, editorStyles } from '@store/atoms/code-editor'
 import { toDecimal } from '@utils/toDecimal'
+import Background from './background'
 
-const SimpleCodeEditor = () => {
+const EditorRenderer = () => {
   const [codeValue, setCodeValue] = useRecoilState(code)
   return (
     <Box
@@ -51,22 +52,24 @@ const CodeEditor = () => {
   const { opacity, rotate, scale } = useRecoilValue(editorStyles)
 
   return (
-    <Wrapper
-      aria-label='code-editor'
-      top={top}
-      left={left}
-      scale={toDecimal(scale)}
-      rotate={rotate}
-      opacity={toDecimal(opacity)}
-    >
-      <Header>
-        <WindowButtonsIcon />
-        <Tab />
-      </Header>
-      <AnimatePresence exitBeforeEnter>
-        <SimpleCodeEditor />
-      </AnimatePresence>
-    </Wrapper>
+    <Background>
+      <Wrapper
+        aria-label='code-editor'
+        top={top}
+        left={left}
+        scale={toDecimal(scale)}
+        rotate={rotate}
+        opacity={toDecimal(opacity)}
+      >
+        <Header>
+          <WindowButtonsIcon />
+          <Tab />
+        </Header>
+        <AnimatePresence exitBeforeEnter>
+          <EditorRenderer />
+        </AnimatePresence>
+      </Wrapper>
+    </Background>
   )
 }
 

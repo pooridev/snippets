@@ -1,12 +1,10 @@
-import { useRef, useState } from 'react'
-import { Box as ChBox, theme } from '@chakra-ui/react'
+import { PropsWithChildren, useRef, useState } from 'react'
+import { Box, theme } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import Moveable from 'react-moveable'
 import { OnResizeStart, OnResize } from 'react-moveable/declaration'
 
-import CodeEditor from './code-editor'
-
-const CodeEditorWrapper = () => {
+const Background = ({ children }: PropsWithChildren) => {
   const moveableTargetRef = useRef<HTMLDivElement | null>(null)
 
   const [frame, setFrame] = useState({
@@ -15,9 +13,9 @@ const CodeEditorWrapper = () => {
 
   return (
     <>
-      <Box id='code-editor' ref={moveableTargetRef}>
-        <CodeEditor />
-      </Box>
+      <Wrapper id='code-editor' ref={moveableTargetRef}>
+        {children}
+      </Wrapper>
       <Moveable
         roundRelative
         target={moveableTargetRef}
@@ -48,7 +46,7 @@ const CodeEditorWrapper = () => {
   )
 }
 
-const Box = styled(ChBox)`
+const Wrapper = styled(Box)`
   background: linear-gradient(354deg, rgb(40, 53, 147), rgb(25, 118, 210));
   min-width: 200px;
   width: 400px;
@@ -60,4 +58,4 @@ const Box = styled(ChBox)`
   position: relative;
 `
 
-export default CodeEditorWrapper
+export default Background

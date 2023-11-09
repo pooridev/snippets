@@ -3,7 +3,7 @@ import { FormLabel, HStack, Text, VStack } from '@chakra-ui/react'
 
 import NumberInput from '@components/shared/number-input'
 import { editorPosition } from '@store/atoms/code-editor'
-import { DEFUALT_POSITIONS } from '@components/code-editor-wrapper/constants'
+import { DEFUALT_POSITIONS } from '@components/code-editor/constants'
 import { leftPosition, topPosition } from '@store/selectors/code-editor'
 
 const LeftPosition = () => {

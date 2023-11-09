@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { useSetRecoilState } from 'recoil'
 
-import { DEFUALT_STYLES } from '@components/code-editor-wrapper/constants'
+import { DEFUALT_STYLES } from '@components/code-editor/constants'
 import { editorStyles } from '@store/atoms/code-editor'
 import Slider from './slider'
 

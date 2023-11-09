@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 
-import CodeEditorWrapper from '@components/code-editor-wrapper'
+import CodeEditorWrapper from '@components/code-editor/background'
 
 import Alignment from '.'
 import render from '../../../../test/renderWithProviders'

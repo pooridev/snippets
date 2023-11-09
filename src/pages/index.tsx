@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 
 import Navbar from '@components/shared/navbar'
 import Sidebar from '@components/shared/sidebar'
-import CodeEditorWrapper from '@components/code-editor-wrapper'
+import CodeEditor from '@components/code-editor'
 
 function Home() {
   return (
@@ -11,7 +11,7 @@ function Home() {
       <Navbar />
       <Sidebar />
       <Box display='flex' justifyContent='center' alignItems='center' as='main'>
-        <CodeEditorWrapper />
+        <CodeEditor />
       </Box>
     </React.Fragment>
   )

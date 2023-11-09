@@ -3,9 +3,9 @@ import { Box, theme } from '@chakra-ui/react'
 import { useState } from 'react'
 import { rem } from 'polished'
 
-import { TabData } from '@components/code-editor-wrapper/types'
+import { TabData } from '@components/code-editor/types'
 import { AddIcon, CloseIcon, JSXIcon } from '@components/shared/icons'
-import { findIconByLabel } from '@components/code-editor-wrapper/utils'
+import { findIconByLabel } from '@components/code-editor/utils'
 import Button from '@components/shared/button'
 
 const Tab = () => {
