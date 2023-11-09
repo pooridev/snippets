@@ -17,10 +17,10 @@ const Tab = () => {
   const hasTab = Boolean(tab)
   const ExtensionIcon = () => tab?.icon || null
 
-  const handleFileNameChange = (newFileName: string) => {
+  const handleFileNameChange = (tabFileName: string) => {
     setTab({
-      icon: findIconByLabel(newFileName),
-      label: newFileName.trim(),
+      icon: findIconByLabel(tabFileName),
+      label: tabFileName.trim(),
     })
   }
 
@@ -28,16 +28,16 @@ const Tab = () => {
     setTab(null)
   }
 
-  const addNewTab = () => {
+  const createTab = () => {
     setTab({
       label: '',
       icon: null,
     })
   }
 
-  const deleteOrAdd = () => {
+  const deleteOrCreate = () => {
     if (hasTab) deleteTab()
-    else addNewTab()
+    else createTab()
   }
 
   return (
@@ -70,7 +70,7 @@ const Tab = () => {
           p={0}
           borderRadius='full'
           bg='transparent'
-          onClick={deleteOrAdd}
+          onClick={deleteOrCreate}
         >
           {hasTab ? (
             <CloseIcon width={theme.space[3.5]} height={theme.space[3.5]} />
