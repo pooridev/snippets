@@ -3,7 +3,7 @@ import { screen, waitFor } from '@testing-library/react'
 import CodeEditorWrapper from '@components/code-editor/background'
 
 import Alignment from '.'
-import render from '../../../../test/renderWithProviders'
+import render from '../../../test/renderWithProviders'
 
 const leftAlignLabel = 'Align element left'
 const codeEditorLabel = 'code-editor'

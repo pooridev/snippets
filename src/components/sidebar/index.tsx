@@ -5,7 +5,7 @@ import { rem } from 'polished'
 import AdvancedStyle from './advanced-style'
 import Alignment from './alignment'
 import EditorPositionInputs from './editor-position-inputs'
-import FormatCodeButton from './format-code-button'
+import FormatterButton from './formatter-button'
 
 const Sidebar = () => {
   return (
@@ -13,7 +13,7 @@ const Sidebar = () => {
       <Alignment />
       <EditorPositionInputs />
       <AdvancedStyle />
-      <FormatCodeButton />
+      <FormatterButton />
     </VStack>
   )
 }

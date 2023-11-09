@@ -7,7 +7,7 @@ import { useHotkeys } from 'react-hotkeys-hook'
 import Button from '@components/shared/button'
 import { code } from '@store/atoms/code-editor'
 
-const FormatCodeButton = () => {
+const FormatterButton = () => {
   const [codeValue, setCodeValue] = useRecoilState(code)
 
   const formatCode = () => {
@@ -31,4 +31,4 @@ const FormatCodeButton = () => {
   )
 }
 
-export default FormatCodeButton
+export default FormatterButton
