@@ -1,16 +1,18 @@
-import { HStack, Text, Tooltip, VStack } from '@chakra-ui/react'
 import { throttle } from 'radash'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { HStack, Text, Tooltip, VStack } from '@chakra-ui/react'
+
+import { editorPosition, hoveredPosition } from '@store/atoms/code-editor'
+import IconButton from '@components/shared/icon-button'
 
 import { alignments } from '../contants'
-import IconButton from '@components/shared/icon-button'
-import { editorPosition } from '@store/atoms/code-editor'
 import { ActionKeys } from '../types'
 
 const throttleInterval = 600 // 600ms
 
-const Alignment = () => {
+export default function Alignment() {
   const setPosition = useSetRecoilState(editorPosition)
+  const setHovered = useSetRecoilState(hoveredPosition)
 
   const actions: Record<ActionKeys, () => void> = {
     left: throttle({ interval: throttleInterval }, () => setPosition(prev => ({ ...prev, left: 0 }))),
@@ -27,17 +29,19 @@ const Alignment = () => {
   }
 
   return (
-    <VStack alignItems='flex-start' gap={1}>
+    <VStack w='full' alignItems='flex-start' gap={1}>
       <Text fontWeight='medium'>Alignments</Text>
-      <HStack spacing={1}>
+      <HStack spacing={0}>
         {alignments.map(item => (
           <Tooltip key={item.key} px={3} py={2} borderRadius='md' placement='bottom' label={item.title}>
             <IconButton
-              onClick={actions[item.key]}
+              aria-label={item.title}
               size='sm'
               borderRadius='md'
-              aria-label={item.title}
               icon={item.icon}
+              onClick={actions[item.key]}
+              onMouseOut={() => setHovered('')}
+              onMouseOver={() => setHovered(item.key)}
             />
           </Tooltip>
         ))}
@@ -45,5 +49,3 @@ const Alignment = () => {
     </VStack>
   )
 }
-
-export default Alignment

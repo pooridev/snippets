@@ -21,3 +21,8 @@ export const editorStyles = atom({
     rotate: 0,
   },
 })
+
+export const hoveredPosition = atom({
+  key: 'hovered-position',
+  default: '',
+})
