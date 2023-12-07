@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { ChakraProvider } from '@chakra-ui/react'
 import { RecoilRoot } from 'recoil'
-import Home from './pages/index'
+import Home from './pages/home'
 
 import theme from '../theme'
 
