@@ -1,8 +1,9 @@
 import { PropsWithChildren, useRef, useState } from 'react'
+import { OnResizeStart, OnResize } from 'react-moveable/declaration'
 import { Box, theme } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import Moveable from 'react-moveable'
-import { OnResizeStart, OnResize } from 'react-moveable/declaration'
+import PreviewNextPosition from '../preview-next-position'
 
 const Background = ({ children }: PropsWithChildren) => {
   const moveableTargetRef = useRef<HTMLDivElement | null>(null)
@@ -15,6 +16,7 @@ const Background = ({ children }: PropsWithChildren) => {
     <>
       <Wrapper id='code-editor' ref={moveableTargetRef}>
         {children}
+        <PreviewNextPosition />
       </Wrapper>
       <Moveable
         roundRelative
