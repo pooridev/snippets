@@ -7,9 +7,8 @@ import {
   SliderThumb as CHSliderThumb,
   Tooltip,
   theme,
-  useStyleConfig,
 } from '@chakra-ui/react'
-import { FC, memo, useRef, useState } from 'react'
+import { FC, memo } from 'react'
 
 import { SliderProps } from '@components/sidebar/types'
 import IconButton from '@components/shared/icon-button'
@@ -18,15 +17,7 @@ import styled from '@emotion/styled'
 import { sliderUnits } from '@components/sidebar/contants'
 
 const Slider: FC<SliderProps> = props => {
-  const { label, value, unit, onChange, min, max } = props
-  const sliderThumbRef = useRef<HTMLDivElement>(null)
-
-  const [sliderValue, setSliderValue] = useState(() => value)
-
-  const handleReset = () => {
-    setSliderValue(value)
-    onChange?.(value)
-  }
+  const { label, value, defaultValue, unit, onChange, min, max } = props
 
   return (
     <Box display='flex' flexDir='column' alignItems='flex-start' w='100%'>
@@ -43,10 +34,17 @@ const Slider: FC<SliderProps> = props => {
           fontSize='xs'
           mb='1'
         >
-          {sliderValue}
+          {value}
           {sliderUnits[unit]}
           <Tooltip px={3} py={2} borderRadius='md' placement='top' label='Reset value'>
-            <IconButton onClick={handleReset} ml='1' p={0} size='xs' aria-label='Reset value' icon={<ResetIcon />} />
+            <IconButton
+              onClick={() => onChange?.(defaultValue)}
+              ml='1'
+              p={0}
+              size='xs'
+              aria-label='Reset value'
+              icon={<ResetIcon />}
+            />
           </Tooltip>
         </Box>
       </Box>
@@ -54,19 +52,15 @@ const Slider: FC<SliderProps> = props => {
         <ChSlider
           max={max}
           min={min}
-          onChange={value => {
-            onChange?.(value)
-            setSliderValue(value)
-          }}
+          onChange={newValue => onChange?.(newValue)}
           w='100%'
           aria-label={label + ' slider'}
-          value={sliderValue}
-          defaultValue={value}
+          value={value}
         >
           <SliderTrack w='100%' borderRadius='3px' h='6px' bg='gray.200'>
-            <SliderFilledTrack bg='gray.200' />
+            <SliderFilledTrack bg='blue.500' />
           </SliderTrack>
-          <SliderThumb ref={sliderThumbRef} />
+          <SliderThumb />
         </ChSlider>
       </Box>
     </Box>

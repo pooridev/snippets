@@ -6,12 +6,14 @@ import AdvancedStyle from './advanced-style'
 import Alignment from './alignment'
 import EditorPositionInputs from './editor-position-inputs'
 import FormatterButton from './formatter-button'
+import LanguageSelect from './language-select'
 
 const Sidebar = () => {
   return (
     <VStack as='aside'>
       <Alignment />
       <EditorPositionInputs />
+      <LanguageSelect />
       <AdvancedStyle />
       <FormatterButton />
     </VStack>

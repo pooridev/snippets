@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 
-import CodeEditorWrapper from '@components/code-editor/background'
+import CodeEditor from '@components/code-editor'
 
 import Alignment from '.'
 import render from '../../../test/renderWithProviders'
@@ -10,13 +10,17 @@ const codeEditorLabel = 'code-editor'
 
 describe('<Alignment />', () => {
   test('the code editor should be aligned to the left side if the user clicked on left align button', async () => {
-    render(<Alignment />)
-    render(<CodeEditorWrapper />)
+    render(
+      <>
+        <Alignment />
+        <CodeEditor />
+      </>
+    )
 
     screen.getByLabelText(leftAlignLabel).click()
 
     const codeEditorElement = screen.getByLabelText(codeEditorLabel)
 
-    waitFor(() => expect(codeEditorElement).toHaveStyle({ left: '0%' }))
+    await waitFor(() => expect(codeEditorElement).toHaveStyle({ left: '0%' }))
   })
 })

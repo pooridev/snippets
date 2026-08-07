@@ -3,9 +3,13 @@ import { OnResizeStart, OnResize } from 'react-moveable/declaration'
 import { Box, theme } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import Moveable from 'react-moveable'
+import { useRecoilValue } from 'recoil'
+
 import PreviewNextPosition from '../preview-next-position'
+import { editorBackground } from '@store/atoms/code-editor'
 
 const Background = ({ children }: PropsWithChildren) => {
+  const background = useRecoilValue(editorBackground)
   const moveableTargetRef = useRef<HTMLDivElement | null>(null)
 
   const [frame, setFrame] = useState({
@@ -14,7 +18,7 @@ const Background = ({ children }: PropsWithChildren) => {
 
   return (
     <>
-      <Wrapper id='code-editor' ref={moveableTargetRef}>
+      <Wrapper id='code-editor' bg={background} ref={moveableTargetRef}>
         {children}
         <PreviewNextPosition />
       </Wrapper>
@@ -49,7 +53,6 @@ const Background = ({ children }: PropsWithChildren) => {
 }
 
 const Wrapper = styled(Box)`
-  background: linear-gradient(354deg, rgb(40, 53, 147), rgb(25, 118, 210));
   min-width: 200px;
   width: 400px;
   min-height: 100px;

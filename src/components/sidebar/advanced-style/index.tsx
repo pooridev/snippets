@@ -8,60 +8,81 @@ import {
   Text,
   theme,
 } from '@chakra-ui/react'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 
-import { DEFUALT_STYLES } from '@components/code-editor/constants'
-import { editorStyles } from '@store/atoms/code-editor'
+import { DEFAULT_WINDOW_STYLES, DEFUALT_STYLES } from '@components/code-editor/constants'
+import { editorStyles, windowStyles } from '@store/atoms/code-editor'
 import Slider from './slider'
 
-const Opacity = () => {
-  const setStyles = useSetRecoilState(editorStyles)
+const TransformSliders = () => {
+  const [styles, setStyles] = useRecoilState(editorStyles)
 
   return (
-    <Slider
-      label='Opacity'
-      value={DEFUALT_STYLES.opacity}
-      min={0}
-      max={100}
-      onChange={value => {
-        setStyles(prev => ({ ...prev, opacity: value }))
-      }}
-      unit='percent'
-    />
+    <>
+      <Slider
+        label='Opacity'
+        value={styles.opacity}
+        defaultValue={DEFUALT_STYLES.opacity}
+        min={0}
+        max={100}
+        unit='percent'
+        onChange={opacity => setStyles(prev => ({ ...prev, opacity }))}
+      />
+      <Slider
+        label='Scale'
+        value={styles.scale}
+        defaultValue={DEFUALT_STYLES.scale}
+        min={0}
+        max={200}
+        unit='percent'
+        onChange={scale => setStyles(prev => ({ ...prev, scale }))}
+      />
+      <Slider
+        label='Rotate'
+        value={styles.rotate}
+        defaultValue={DEFUALT_STYLES.rotate}
+        min={-180}
+        max={180}
+        unit='degree'
+        onChange={rotate => setStyles(prev => ({ ...prev, rotate }))}
+      />
+    </>
   )
 }
 
-const Scale = () => {
-  const setStyles = useSetRecoilState(editorStyles)
+const WindowSliders = () => {
+  const [styles, setStyles] = useRecoilState(windowStyles)
 
   return (
-    <Slider
-      label='Scale'
-      value={DEFUALT_STYLES.scale}
-      unit='percent'
-      min={0}
-      max={200}
-      onChange={value => {
-        setStyles(prev => ({ ...prev, scale: value }))
-      }}
-    />
-  )
-}
-
-const Rotate = () => {
-  const setStyles = useSetRecoilState(editorStyles)
-
-  return (
-    <Slider
-      min={-180}
-      max={180}
-      label='Rotate'
-      value={DEFUALT_STYLES.rotate}
-      onChange={value => {
-        setStyles(prev => ({ ...prev, rotate: value }))
-      }}
-      unit='degree'
-    />
+    <>
+      <Slider
+        label='Padding'
+        value={styles.padding}
+        defaultValue={DEFAULT_WINDOW_STYLES.padding}
+        min={0}
+        max={64}
+        unit='pixel'
+        onChange={padding => setStyles(prev => ({ ...prev, padding }))}
+      />
+      <Slider
+        label='Border radius'
+        value={styles.borderRadius}
+        defaultValue={DEFAULT_WINDOW_STYLES.borderRadius}
+        min={0}
+        max={40}
+        unit='pixel'
+        onChange={borderRadius => setStyles(prev => ({ ...prev, borderRadius }))}
+      />
+      <Slider
+        label='Shadow'
+        value={styles.shadow}
+        defaultValue={DEFAULT_WINDOW_STYLES.shadow}
+        min={0}
+        max={100}
+        unit='percent'
+        onChange={shadow => setStyles(prev => ({ ...prev, shadow }))}
+      />
+    </>
   )
 }
 
@@ -74,14 +95,26 @@ const AdvancedStyle = () => {
       >
         <AccordionButton>
           <Box flex='1' textAlign='left'>
+            <Text fontWeight='medium'> Window style </Text>
+          </Box>
+          <AccordionIcon />
+        </AccordionButton>
+        <AccordionPanel>
+          <WindowSliders />
+        </AccordionPanel>
+      </AccordionItem>
+      <AccordionItem
+        marginInlineStart={`calc(${theme.space[4]} * -1)`}
+        marginInlineEnd={`calc(${theme.space[4]} * -1)`}
+      >
+        <AccordionButton>
+          <Box flex='1' textAlign='left'>
             <Text fontWeight='medium'> Advanced style </Text>
           </Box>
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel>
-          <Opacity />
-          <Scale />
-          <Rotate />
+          <TransformSliders />
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

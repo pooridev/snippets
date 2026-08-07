@@ -44,6 +44,7 @@ const alignments: Array<{ icon: JSX.Element; title: string; key: ActionKeys }> =
 const sliderUnits: Record<string, string> = {
   degree: 'deg',
   percent: '%',
+  pixel: 'px',
 }
 
 export { alignments, sliderUnits }
